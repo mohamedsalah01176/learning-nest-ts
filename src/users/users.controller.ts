@@ -1,65 +1,42 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put , ParseIntPipe, UsePipes, ValidationPipe} from '@nestjs/common';
+import type  { IUser } from './interfaces.js';
+import { UsersService } from './users.service.js';
+import { CreateUserDTO } from './dto/create-user.dto.js';
+import { UpdateUserDTO } from './dto/update-user.dto.js';
 
 
 
-export interface IUser{
-    id?:number,
-    name?:string,
-    email?:string
-}
+
 @Controller('users')
 export class UsersController {
-    private users:IUser[] = [{id:1, name:"mohamed",email:"mohamed@com"}, {id:2, name:"salah",email:"salah@com"}];
+    constructor(private UsersService:UsersService){}
+
+
     @Get()
     findAll(){
-        return this.users
+        return this.UsersService.handleGetAllUsers();
     }
 
     @Get(":id")
-    findOne(@Param ("id") id:string){
-        const product=this.users.find((item)=>item.id===+id)
-        
-        if(product){
-            return product;
-        }else{
-            return "Product not found"
-        }
+    findOne(@Param ("id", ParseIntPipe) id:string){
+        return this.UsersService.handleGetSingleUser(+id);
 
     }
 
     @Post()
-    createUser(@Body() body:IUser){
-        if(!body){
-            return "name and email required";
-        }
-
-        this.users.push({id:this.users.length +1,...body})
-
-        return "User Created"
+    @UsePipes(ValidationPipe)
+    createUser(@Body() body:CreateUserDTO){
+        return this.UsersService.handleAddNewUser(body);
     }
 
     @Put(":id")
-    updateUser(@Param("id") id:string, @Body() body:IUser){
-        const userindex=this.users.findIndex(user=> user.id === +id);
-
-        if(!userindex){
-            return "User Not Found";
-        }
-        
-        this.users[userindex]={...this.users[userindex],...body};
-        return "User Updated";
+    @UsePipes(ValidationPipe)
+    updateUser(@Param("id" , ParseIntPipe) id:string, @Body() updateUserDTO:UpdateUserDTO){
+        return this.UsersService.handleUpdateUser(+id,updateUserDTO)
     }
 
     @Delete(":id")
-    deleteUser(@Param("id") id:string){
-        const userindex=this.users.findIndex(user=> user.id === +id);
-
-
-        if(userindex > -1){
-            this.users[userindex]={name:"",email:""};
-            return "User Deleted"
-        }
-
-        return "User Not Found";
+    deleteUser(@Param("id" , ParseIntPipe) id:number){
+        return this.UsersService.handleRemoveUser(id)
     }
 }
