@@ -7,6 +7,7 @@ async function bootstrap() {
     instrument: ObserveInstrument,
   });
   // app.use(AuthMiddlewareFunction)
+  // app.useGlobalGuards(new globalGard())
   await app.listen(process.env.PORT ?? 5000);
 }
 await bootstrap();

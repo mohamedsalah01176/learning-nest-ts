@@ -2,13 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { IUser } from './interfaces.js';
 import { CreateUserDTO } from './dto/create-user.dto.js';
 import { UpdateUserDTO } from './dto/update-user.dto.js';
-
+import jwt from 'jsonwebtoken';
 @Injectable()
 export class UsersService {
     private users:IUser[] = [{id:1, name:"mohamed",email:"mohamed@com"}, {id:2, name:"salah",email:"salah@com"}];
 
     handleGetAllUsers(){
-         return this.users
+        const token=jwt.sign({user:this.users[0],role:'admin'},process.env.JWT_SECRET as string,{expiresIn:"1h"})
+         return token
     }
 
     handleGetSingleUser(id:number){

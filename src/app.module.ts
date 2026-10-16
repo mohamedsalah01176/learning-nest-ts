@@ -3,7 +3,9 @@ import { createObserveModule } from '@nestjs/observe';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
-import { AuthMiddleware } from './auth/auth.middleware.js';
+import { AuthMiddleware } from './middileware/auth.middleware.js';
+import { DashboardModule } from './dashboard/dashboard.module.js';
+import { ConfigModule } from '@nestjs/config';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -11,18 +13,18 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
   imports: [
     // Distributed tracing, auto-correlated logs, request/job metrics, error
     // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
-    ObserveModule.forRoot({
-      appKey: 'YOUR_APP_KEY',
-      appSecret: 'YOUR_APP_SECRET',
-      serviceId: 'learning-nest',
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
     UsersModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes("*")
+    consumer.apply(AuthMiddleware).forRoutes("dashboard")
+    // consumer.apply(AuthMiddleware).forRoutes("*")
   }
 }
