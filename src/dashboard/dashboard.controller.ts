@@ -5,6 +5,7 @@ import { UpdateDashboardDto } from './dto/update-dashboard.dto.js';
 import { AuthGuard } from '../guards/auth.guard.js';
 import { Roles } from '../decorators/roles/roles.decorator.js';
 import { RolesGuard } from '../guards/roles.guard.js';
+import { RoleSystem } from '../decorators/roles/roles.enums.js';
 
 @Controller('dashboard')
 @UseGuards(AuthGuard,RolesGuard)
@@ -17,7 +18,7 @@ export class DashboardController {
   }
  
   @Get()
-  @Roles(["admin"])
+  @Roles([RoleSystem.Admin])
   findAll() {
     return this.dashboardService.findAll();
   }
