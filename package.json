@@ -25,7 +25,11 @@
     "@nestjs/common": "^12.0.1",
     "@nestjs/config": "^12.0.1",
     "@nestjs/core": "^12.0.1",
+<<<<<<< HEAD
     "@nestjs/mapped-types": "^12.0.0",
+=======
+    "@nestjs/mapped-types": "*",
+>>>>>>> 6116db5 (learn if module use serviece from another module and if two modules use from together)
     "@nestjs/observe": "^0.3.0",
     "@nestjs/platform-express": "^12.0.1",
     "class-transformer": "^0.5.1",

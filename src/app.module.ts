@@ -3,9 +3,15 @@ import { createObserveModule } from '@nestjs/observe';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
+<<<<<<< HEAD
 import { AuthMiddleware } from './middileware/auth.middleware.js';
 import { DashboardModule } from './dashboard/dashboard.module.js';
 import { ConfigModule } from '@nestjs/config';
+=======
+import { ProductsModule } from './products/products.module.js';
+import { ReviewsModule } from './reviews/reviews.module.js';
+import { PersonsModule } from './persons/persons.module.js';
+>>>>>>> 6116db5 (learn if module use serviece from another module and if two modules use from together)
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -17,7 +23,13 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       isGlobal: true,
     }),
     UsersModule,
+<<<<<<< HEAD
     DashboardModule,
+=======
+    ProductsModule,
+    ReviewsModule,
+    PersonsModule,
+>>>>>>> 6116db5 (learn if module use serviece from another module and if two modules use from together)
   ],
   controllers: [AppController],
   providers: [AppService],
