@@ -1,11 +1,11 @@
 import { Type } from "class-transformer";
-import { IsNotEmpty, Min ,Max , Length ,IsEmail ,IsNotEmptyObject , ValidateNested , IsInt} from "class-validator";
+import { IsNotEmpty, Min ,Max , Length ,IsEmail ,IsNotEmptyObject , ValidateNested , IsInt, IsString, MinLength, MaxLength} from "class-validator";
 
-class DetailsUserDTO{
+export class DetailsUserDTO{
     @IsNotEmpty()
     @IsInt()
     @Min(5)
-    @Max(100)
+    @Max(100000)
     salary:number;
     
     @IsNotEmpty()
@@ -20,6 +20,12 @@ export class CreateUserDTO{
     @IsNotEmpty()
     @IsEmail()
     email:string
+
+    @IsNotEmpty()
+    @IsString()
+    @MinLength(8)
+    @MaxLength(100)
+    password: string;
 
 
     @ValidateNested()

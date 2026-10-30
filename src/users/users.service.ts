@@ -1,56 +1,52 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { IUser } from './interfaces.js';
 import { CreateUserDTO } from './dto/create-user.dto.js';
 import { UpdateUserDTO } from './dto/update-user.dto.js';
 import jwt from 'jsonwebtoken';
+import { Repository } from 'typeorm';
+import { User } from './entities/users.entity.js';
+import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class UsersService {
-    private users:IUser[] = [{id:1, name:"mohamed",email:"mohamed@com"}, {id:2, name:"salah",email:"salah@com"}];
 
-    handleGetAllUsers(){
-        const token=jwt.sign({user:this.users[0],role:'admin'},process.env.JWT_SECRET as string,{expiresIn:"1h"})
-         return token
+    constructor(@InjectRepository(User) private readonly userRespository:Repository<User>){}
+
+
+    // private users:IUser[] = [{id:1, name:"mohamed",email:"mohamed@com"}, {id:2, name:"salah",email:"salah@com"}];
+
+    async handleGetAllUsers(){
+
+        const usesrs=await this.userRespository.find(); 
+        // const token=jwt.sign({user:this.users[0],role:'admin'},process.env.JWT_SECRET as string,{expiresIn:"1h"})
+         return usesrs;
     }
 
-    handleGetSingleUser(id:number){
-        const product=this.users.find((item)=>item.id===+id)
+    async handleGetSingleUser(id:number){
+        // const product=this.users.find((item)=>item.id===+id)
+
+        const userFound= await this.userRespository.findOne({where:{id}})
         
-        if(product){
-            return product;
-        }else{
-            return "Product not found"
-        }
+        if(!userFound) throw new NotFoundException("user not found");
+
+        return userFound
     }
 
-    handleAddNewUser(body:CreateUserDTO){
-        if(!body){
-            return "name and email required";
-        }
+    async handleAddNewUser(body:CreateUserDTO){
+        if(!body) throw new NotFoundException("name and email required");
 
-        this.users.push({id:this.users.length +1,...body})
+        const user = await this.userRespository.create(body);
 
-        return this.users[this.users.length -1];
+        return await this.userRespository.save(user);
     }
 
-    handleUpdateUser(id:number, body:UpdateUserDTO){
-        const userindex=this.users.findIndex(user=> user.id === +id);
-
-        if(!userindex){
-            return "User Not Found";
-        }
-        
-        this.users[userindex]={...this.users[userindex],...body};
-        return this.users[userindex];
+    async handleUpdateUser(id:number, body:UpdateUserDTO){
+        const user =  await this.handleGetSingleUser(id);
+        return await this.userRespository.save({...user,...body})
     }
-    handleRemoveUser(id:number){
-        const userindex=this.users.findIndex(user=> user.id === +id);
+    async handleRemoveUser(id:number){
+        const user =  await this.handleGetSingleUser(id);
+        await this.userRespository.remove(user);                                                                                                                                                
+        return "User Deleted Successfully"
 
-
-        if(userindex > -1){
-            this.users[userindex]={name:"",email:""};
-            return "User Deleted"
-        }
-
-        return "User Not Found";
     }
 }

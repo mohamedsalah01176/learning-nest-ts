@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule, ObserveInstrument } from './app.module.js';
+import { ValidationPipe } from '@nestjs/common';
 // import { AuthMiddlewareFunction } from './auth/auth.middleware.js';
 
 async function bootstrap() {
@@ -8,6 +9,11 @@ async function bootstrap() {
   });
   // app.use(AuthMiddlewareFunction)
   // app.useGlobalGuards(new globalGard())
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted:true
+  }))
+  app.use
   await app.listen(process.env.PORT ?? 5000);
 }
 await bootstrap();
