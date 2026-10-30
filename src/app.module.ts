@@ -5,7 +5,7 @@ import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
 import { AuthMiddleware } from './middileware/auth.middleware.js';
 import { DashboardModule } from './dashboard/dashboard.module.js';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProductsModule } from './products/products.module.js';
 import { ReviewsModule } from './reviews/reviews.module.js';
 import { PersonsModule } from './persons/persons.module.js';
@@ -14,27 +14,40 @@ import { User } from './users/entities/users.entity.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
+
 @Module({
   imports: [
     // Distributed tracing, auto-correlated logs, request/job metrics, error
     // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
     UsersModule,
     DashboardModule,
     ProductsModule,
     ReviewsModule,
     PersonsModule,
-    TypeOrmModule.forRoot({
-      type:"postgres",
-      database:"nestjs-app-learn",
-      username:"postgres",
-      password:"01155953141Az",
-      port:5432,
-      host:"localhost",
-      synchronize:true, // develop mode only
-      entities:[User]
+    TypeOrmModule.forRootAsync({
+      inject:[ConfigService],
+      useFactory:(config:ConfigService)=>{
+        console.log({
+  host: config.get('DB_HOST'),
+  database: config.get('DB_DATABASE'),
+  passwordExists: Boolean(config.get('DB_PASSWORD')),
+});
+        
+        return{
+          type:"postgres",
+          database:config.get<string>("DB_DATABASE") || config.get<string>("DB_DATBASE"),
+          username:config.get<string>("DB_USERNAME"),
+          password:String(config.get<string>("DB_PASSWORD") ?? ""),
+          port:Number(config.get<string>("DB_PORT") || 5432),
+          host:config.get<string>("DB_HOST") || "localhost",
+          synchronize:process.env.NODE_ENV !== "production", // develop mode only
+          entities:[User]
+        }
+      }
+    }),
+    ConfigModule.forRoot({
+      isGlobal:true,
+      envFilePath:`.env.${process.env.NODE_ENV || 'development'}`
     })
   ],
   controllers: [AppController],
