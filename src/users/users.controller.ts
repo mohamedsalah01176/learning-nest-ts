@@ -3,6 +3,7 @@ import type  { IUser } from './interfaces.js';
 import { UsersService } from './users.service.js';
 import { CreateUserDTO } from './dto/create-user.dto.js';
 import { UpdateUserDTO } from './dto/update-user.dto.js';
+import { UppercasePipe } from '../pipes/uppercase/uppercase.pipe.js';
 
 
 
@@ -25,7 +26,7 @@ export class UsersController {
 
     @Post()
     @UsePipes(ValidationPipe)
-    createUser(@Body() body:CreateUserDTO){
+    createUser(@Body(UppercasePipe) body:CreateUserDTO){
         return this.UsersService.handleAddNewUser(body);
     }
 
