@@ -13,15 +13,11 @@ async function bootstrap() {
 
   // using global guard
   // app.useGlobalGuards(new globalGard())
-
-
-  // using global pipe
-  // app.useGlobalPipes(new ValidationPipe(
-  //   {
-  //     whitelist:true,
-  //     forbidNonWhitelisted:true,
-  //   }
-  // ))
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    forbidNonWhitelisted:true
+  }))
+  app.use
   await app.listen(process.env.PORT ?? 5000);
 }
 await bootstrap();

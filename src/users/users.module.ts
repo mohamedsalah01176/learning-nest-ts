@@ -3,9 +3,11 @@ import { EmployeeModule } from '../employee/employee.module.js';
 import { UsersController } from './users.controller.js';
 import { UsersService } from './users.service.js';
 import { UsersMiddleware } from './users.middleware.js';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './entities/users.entity.js';
 
 @Module({
-    imports:[EmployeeModule],
+    imports:[EmployeeModule,TypeOrmModule.forFeature([User])],
     controllers: [UsersController],
     providers: [UsersService]
 })
