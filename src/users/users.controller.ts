@@ -1,43 +1,55 @@
-import { Body, Controller, Delete, Get, Param, Post, Put , ParseIntPipe, UsePipes, ValidationPipe} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put , ParseIntPipe, UsePipes, ValidationPipe, HttpCode , HttpStatus} from '@nestjs/common';
 import type  { IUser } from './interfaces.js';
 import { UsersService } from './users.service.js';
 import { CreateUserDTO } from './dto/create-user.dto.js';
 import { UpdateUserDTO } from './dto/update-user.dto.js';
 import { UppercasePipe } from '../pipes/uppercase/uppercase.pipe.js';
+import { LoginUserDTO } from './dto/login.dto.js';
 
 
 
 
-@Controller('users')
+@Controller('api/users')
 export class UsersController {
     constructor(private UsersService:UsersService){}
 
-
-    @Get()
-    findAll(){
-        return this.UsersService.handleGetAllUsers();
+    @Post("auth/register")
+    async register( @Body() body:CreateUserDTO){
+         return this.UsersService.Register(body);     
+    }
+    
+    @Post("auth/login")
+    @HttpCode(HttpStatus.OK)
+    async login( @Body() body:LoginUserDTO){
+         return this.UsersService.login(body);     
     }
 
-    @Get(":id")
-    findOne(@Param ("id", ParseIntPipe) id:string){
-        return this.UsersService.handleGetSingleUser(+id);
 
-    }
+    // @Get()
+    // findAll(){
+    //     return this.UsersService.handleGetAllUsers();
+    // }
 
-    @Post()
-    @UsePipes(ValidationPipe)
-    createUser(@Body(UppercasePipe) body:CreateUserDTO){
-        return this.UsersService.handleAddNewUser(body);
-    }
+    // @Get(":id")
+    // findOne(@Param ("id", ParseIntPipe) id:string){
+    //     return this.UsersService.handleGetSingleUser(+id);
 
-    @Put(":id")
-    @UsePipes(ValidationPipe)
-    updateUser(@Param("id" , ParseIntPipe) id:string, @Body() updateUserDTO:UpdateUserDTO){
-        return this.UsersService.handleUpdateUser(+id,updateUserDTO)
-    }
+    // }
 
-    @Delete(":id")
-    deleteUser(@Param("id" , ParseIntPipe) id:number){
-        return this.UsersService.handleRemoveUser(id)
-    }
+    // @Post()
+    // @UsePipes(ValidationPipe)
+    // createUser(@Body(UppercasePipe) body:CreateUserDTO){
+    //     return this.UsersService.handleAddNewUser(body);
+    // }
+
+    // @Put(":id")
+    // @UsePipes(ValidationPipe)
+    // updateUser(@Param("id" , ParseIntPipe) id:string, @Body() updateUserDTO:UpdateUserDTO){
+    //     return this.UsersService.handleUpdateUser(+id,updateUserDTO)
+    // }
+
+    // @Delete(":id")
+    // deleteUser(@Param("id" , ParseIntPipe) id:number){
+    //     return this.UsersService.handleRemoveUser(id)
+    // }
 }

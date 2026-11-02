@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import type { User } from "./users.entity.js";
 
 @Entity({ name: "user_details" })
 export class UserDetails {
@@ -7,13 +8,17 @@ export class UserDetails {
 
     @Column({
         type:"float",
-        nullable:false
+        nullable:true
     })
     salary: number;
 
     @Column({
         type: "varchar",
-        nullable: false
+        nullable: true
     })
     location: string;
+
+    @OneToOne("User", "details")
+    user: User;
+
 }

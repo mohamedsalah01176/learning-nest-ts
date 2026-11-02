@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsNotEmpty, Min ,Max , Length ,IsEmail ,IsNotEmptyObject , ValidateNested , IsInt, IsString, MinLength, MaxLength} from "class-validator";
+import { IsNotEmpty, Min ,Max , Length ,IsEmail ,IsNotEmptyObject , ValidateNested , IsInt, IsString, MinLength, MaxLength, IsOptional} from "class-validator";
 
 export class DetailsUserDTO{
     @IsNotEmpty()
@@ -29,7 +29,7 @@ export class CreateUserDTO{
 
 
     @ValidateNested()
-    @IsNotEmptyObject()
+    @IsOptional()
     @Type(()=> DetailsUserDTO)
     details:DetailsUserDTO
 }

@@ -11,6 +11,9 @@ import { ReviewsModule } from './reviews/reviews.module.js';
 import { PersonsModule } from './persons/persons.module.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/users.entity.js';
+import { Product } from './products/entities/product.entity.js';
+import { Review } from './reviews/entities/review.entity.js';
+import { UserDetails } from './users/entities/userDetails.entity.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -28,10 +31,10 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       inject:[ConfigService],
       useFactory:(config:ConfigService)=>{
         console.log({
-  host: config.get('DB_HOST'),
-  database: config.get('DB_DATABASE'),
-  passwordExists: Boolean(config.get('DB_PASSWORD')),
-});
+        host: config.get('DB_HOST'),
+        database: config.get('DB_DATABASE'),
+        passwordExists: Boolean(config.get('DB_PASSWORD')),
+      });
         
         return{
           type:"postgres",
@@ -41,7 +44,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
           port:Number(config.get<string>("DB_PORT") || 5432),
           host:config.get<string>("DB_HOST") || "localhost",
           synchronize:process.env.NODE_ENV !== "production", // develop mode only
-          entities:[User]
+          entities:[User,Product,Review,UserDetails]
         }
       }
     }),
