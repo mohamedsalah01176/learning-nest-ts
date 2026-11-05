@@ -2,13 +2,13 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { DashboardService } from './dashboard.service.js';
 import { CreateDashboardDto } from './dto/create-dashboard.dto.js';
 import { UpdateDashboardDto } from './dto/update-dashboard.dto.js';
-import { AuthGuard } from '../guards/auth.guard.js';
+// import { AuthGuard } from '../guards/auth.guard.js';
 import { Roles } from '../decorators/roles/roles.decorator.js';
 import { RolesGuard } from '../guards/roles.guard.js';
 import { RoleSystem } from '../decorators/roles/roles.enums.js';
 
 @Controller('dashboard')
-@UseGuards(AuthGuard,RolesGuard)
+// @UseGuards(AuthGuard,RolesGuard)
 export class DashboardController {
   constructor(private readonly dashboardService: DashboardService) {}
 

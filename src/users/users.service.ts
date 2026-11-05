@@ -1,8 +1,6 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException , NotFoundException } from '@nestjs/common';
 import { IUser, JWTPayload } from './interfaces.js';
 import { CreateUserDTO } from './dto/create-user.dto.js';
-import { UpdateUserDTO } from './dto/update-user.dto.js';
-import jwt from 'jsonwebtoken';
 import { Repository } from 'typeorm';
 import { User } from './entities/users.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -56,7 +54,15 @@ export class UsersService {
        return {accessToken}
     }
 
-    async generateJWT(payload:JWTPayload):Promise<string>{
+    async getInformationOfUser(payloads:JWTPayload){
+        console.log("payloads",payloads)
+        const user = await this.userRespository.findOne({where:{id:payloads?.id}});
+        if(!user) throw new NotFoundException("User Not Found");
+
+        return user;
+    }
+
+    private async generateJWT(payload:JWTPayload):Promise<string>{
         return await this.jwtSefrvice.sign(payload)
     }
 

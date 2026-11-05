@@ -1,10 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put , ParseIntPipe, UsePipes, ValidationPipe, HttpCode , HttpStatus} from '@nestjs/common';
-import type  { IUser } from './interfaces.js';
+import { Body, Controller, Delete, Get, Param, Post, Put , ParseIntPipe , UseGuards, UsePipes, ValidationPipe, HttpCode , HttpStatus} from '@nestjs/common';
+import type  { IUser, JWTPayload } from './interfaces.js';
 import { UsersService } from './users.service.js';
 import { CreateUserDTO } from './dto/create-user.dto.js';
 import { UpdateUserDTO } from './dto/update-user.dto.js';
 import { UppercasePipe } from '../pipes/uppercase/uppercase.pipe.js';
 import { LoginUserDTO } from './dto/login.dto.js';
+import { getUserPayload } from '../decorators/users/getUserPayload.js';
+import { AuthGuard } from '../guards/auth.guard.js';
+
 
 
 
@@ -24,6 +27,11 @@ export class UsersController {
          return this.UsersService.login(body);     
     }
 
+    @Get("me")
+    @UseGuards(AuthGuard)
+    async getUser(@getUserPayload() userPaylod:JWTPayload){
+     return await this.UsersService.getInformationOfUser(userPaylod);
+    }
 
     // @Get()
     // findAll(){

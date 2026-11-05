@@ -1,0 +1,1170 @@
+{
+    "status": "success",
+    "status_code": 200,
+    "message": "home first",
+    "data": {
+        "offers": {
+            "current_page": 1,
+            "data": [
+                {
+                    "id": 108,
+                    "name": "أول عرض",
+                    "description": "هذا هو العرض الأول",
+                    "slug": "267c40f6-844d-47cd-b13d-0a7b1a49a5dd",
+                    "item_type": "offer",
+                    "sku": "skusku2",
+                    "price": "100.00",
+                    "discount": "10.00",
+                    "balance": 500,
+                    "format": null,
+                    "least_variant_stock": 46,
+                    "status": "published",
+                    "is_favourite": 0,
+                    "client": "public",
+                    "estimate_time": "2026-12-01",
+                    "offer_variants": [
+                        {
+                            "id": 200,
+                            "product_id": 112,
+                            "quantity": 2,
+                            "variant": {
+                                "id": 118,
+                                "extra_price": 120,
+                                "stock": 92,
+                                "is_default": "0",
+                                "sku": "1212",
+                                "applies_to": [
+                                    {
+                                        "id": 5,
+                                        "product_option_id": 3,
+                                        "value": "Test ProductOptionValue AR",
+                                        "created_at": "2025-11-09T12:15:46.000000Z",
+                                        "updated_at": "2026-05-24T09:27:48.000000Z",
+                                        "deleted_at": null,
+                                        "product_option": {
+                                            "id": 3,
+                                            "name": "Test ProductOptions AR",
+                                            "values": [
+                                                {
+                                                    "id": 5,
+                                                    "product_option_id": 3,
+                                                    "value": "Test ProductOptionValue AR",
+                                                    "dates": {
+                                                        "created_at": "2025-11-09T12:15:46.000000Z",
+                                                        "updated_at": "2026-05-24T09:27:48.000000Z"
+                                                    }
+                                                },
+                                                {
+                                                    "id": 7,
+                                                    "product_option_id": 3,
+                                                    "value": "XL",
+                                                    "dates": {
+                                                        "created_at": "2025-11-09T12:15:46.000000Z",
+                                                        "updated_at": "2025-11-09T12:15:46.000000Z"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "id": 8,
+                                        "product_option_id": 5,
+                                        "value": "red",
+                                        "created_at": "2025-12-21T08:06:41.000000Z",
+                                        "updated_at": "2025-12-21T08:06:41.000000Z",
+                                        "deleted_at": null,
+                                        "product_option": {
+                                            "id": 5,
+                                            "name": "color",
+                                            "values": [
+                                                {
+                                                    "id": 8,
+                                                    "product_option_id": 5,
+                                                    "value": "red",
+                                                    "dates": {
+                                                        "created_at": "2025-12-21T08:06:41.000000Z",
+                                                        "updated_at": "2025-12-21T08:06:41.000000Z"
+                                                    }
+                                                },
+                                                {
+                                                    "id": 9,
+                                                    "product_option_id": 5,
+                                                    "value": "blue",
+                                                    "dates": {
+                                                        "created_at": "2025-12-21T08:06:41.000000Z",
+                                                        "updated_at": "2025-12-21T08:06:41.000000Z"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "images": [],
+                                "dates": {
+                                    "expires_at": null,
+                                    "created_at": "2025-11-04T07:05:05.000000Z",
+                                    "updated_at": "2026-03-31T09:46:07.000000Z"
+                                }
+                            },
+                            "dates": {
+                                "created_at": "2026-05-24T11:49:37.000000Z",
+                                "updated_at": "2026-05-24T11:49:37.000000Z",
+                                "deleted_at": null
+                            }
+                        }
+                    ],
+                    "reviews_count": 0,
+                    "reviews_average": 0,
+                    "dates": {
+                        "created_at": "2026-05-24T11:49:37.000000Z",
+                        "updated_at": "2026-05-24T11:49:37.000000Z",
+                        "deleted_at": null
+                    }
+                },
+                {
+                    "id": 107,
+                    "name": "أول عرض",
+                    "description": "هذا هو العرض الأول",
+                    "slug": "bb2130ed-2cf7-477e-8bdf-97bbd9828042",
+                    "item_type": "offer",
+                    "sku": "skusku",
+                    "price": "100.00",
+                    "discount": "10.00",
+                    "balance": 500,
+                    "format": null,
+                    "least_variant_stock": 46,
+                    "status": "published",
+                    "is_favourite": 0,
+                    "client": "public",
+                    "estimate_time": "2026-12-01",
+                    "offer_variants": [
+                        {
+                            "id": 199,
+                            "product_id": 112,
+                            "quantity": 2,
+                            "variant": {
+                                "id": 118,
+                                "extra_price": 120,
+                                "stock": 92,
+                                "is_default": "0",
+                                "sku": "1212",
+                                "applies_to": [
+                                    {
+                                        "id": 5,
+                                        "product_option_id": 3,
+                                        "value": "Test ProductOptionValue AR",
+                                        "created_at": "2025-11-09T12:15:46.000000Z",
+                                        "updated_at": "2026-05-24T09:27:48.000000Z",
+                                        "deleted_at": null,
+                                        "product_option": {
+                                            "id": 3,
+                                            "name": "Test ProductOptions AR",
+                                            "values": [
+                                                {
+                                                    "id": 5,
+                                                    "product_option_id": 3,
+                                                    "value": "Test ProductOptionValue AR",
+                                                    "dates": {
+                                                        "created_at": "2025-11-09T12:15:46.000000Z",
+                                                        "updated_at": "2026-05-24T09:27:48.000000Z"
+                                                    }
+                                                },
+                                                {
+                                                    "id": 7,
+                                                    "product_option_id": 3,
+                                                    "value": "XL",
+                                                    "dates": {
+                                                        "created_at": "2025-11-09T12:15:46.000000Z",
+                                                        "updated_at": "2025-11-09T12:15:46.000000Z"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "id": 8,
+                                        "product_option_id": 5,
+                                        "value": "red",
+                                        "created_at": "2025-12-21T08:06:41.000000Z",
+                                        "updated_at": "2025-12-21T08:06:41.000000Z",
+                                        "deleted_at": null,
+                                        "product_option": {
+                                            "id": 5,
+                                            "name": "color",
+                                            "values": [
+                                                {
+                                                    "id": 8,
+                                                    "product_option_id": 5,
+                                                    "value": "red",
+                                                    "dates": {
+                                                        "created_at": "2025-12-21T08:06:41.000000Z",
+                                                        "updated_at": "2025-12-21T08:06:41.000000Z"
+                                                    }
+                                                },
+                                                {
+                                                    "id": 9,
+                                                    "product_option_id": 5,
+                                                    "value": "blue",
+                                                    "dates": {
+                                                        "created_at": "2025-12-21T08:06:41.000000Z",
+                                                        "updated_at": "2025-12-21T08:06:41.000000Z"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "images": [],
+                                "dates": {
+                                    "expires_at": null,
+                                    "created_at": "2025-11-04T07:05:05.000000Z",
+                                    "updated_at": "2026-03-31T09:46:07.000000Z"
+                                }
+                            },
+                            "dates": {
+                                "created_at": "2026-05-24T11:47:22.000000Z",
+                                "updated_at": "2026-05-24T11:47:22.000000Z",
+                                "deleted_at": null
+                            }
+                        }
+                    ],
+                    "reviews_count": 0,
+                    "reviews_average": 0,
+                    "dates": {
+                        "created_at": "2026-05-24T11:47:22.000000Z",
+                        "updated_at": "2026-05-24T11:47:22.000000Z",
+                        "deleted_at": null
+                    }
+                }
+            ],
+            "first_page_url": "http://localhost:9000/website/home/first/index?page=1",
+            "from": 1,
+            "last_page": 1,
+            "last_page_url": "http://localhost:9000/website/home/first/index?page=1",
+            "links": [
+                {
+                    "url": null,
+                    "label": "&laquo; Previous",
+                    "page": null,
+                    "active": false
+                },
+                {
+                    "url": "http://localhost:9000/website/home/first/index?page=1",
+                    "label": "1",
+                    "page": 1,
+                    "active": true
+                },
+                {
+                    "url": null,
+                    "label": "Next &raquo;",
+                    "page": null,
+                    "active": false
+                }
+            ],
+            "next_page_url": null,
+            "path": "http://localhost:9000/website/home/first/index",
+            "per_page": 20,
+            "prev_page_url": null,
+            "to": 2,
+            "total": 2
+        },
+        "ads": [
+            {
+                "image": [
+                    {
+                        "id": 318,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-01-25T09:14:52.000000Z",
+                        "updated_at": "2026-01-25T09:14:52.000000Z"
+                    },
+                    {
+                        "id": 319,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-01-25T09:14:54.000000Z",
+                        "updated_at": "2026-01-25T09:14:54.000000Z"
+                    }
+                ],
+                "ecommerce_image": []
+            },
+            {
+                "image": [
+                    {
+                        "id": 398,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-08-11T11:31:17.000000Z",
+                        "updated_at": "2026-08-11T11:31:17.000000Z"
+                    }
+                ],
+                "ecommerce_image": [
+                    {
+                        "id": 399,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-08-11T11:31:18.000000Z",
+                        "updated_at": "2026-08-11T11:31:18.000000Z"
+                    }
+                ]
+            },
+            {
+                "image": [
+                    {
+                        "id": 407,
+                        "file_path": "Ads/image/TZQWE3V3dRgz8T9P8XJGkHgHkaQoedPXJwzJoFdY.jpg",
+                        "alt_text": null,
+                        "created_at": "2026-08-11T11:53:07.000000Z",
+                        "updated_at": "2026-08-11T11:53:07.000000Z"
+                    }
+                ],
+                "ecommerce_image": [
+                    {
+                        "id": 408,
+                        "file_path": "ecommerce/Ads/image/pF8WJAC0TsKO2Ww0J3f4TA0r2QIRsEBSHIRXG4Ll.jpg",
+                        "alt_text": null,
+                        "created_at": "2026-08-11T11:53:07.000000Z",
+                        "updated_at": "2026-08-11T11:53:07.000000Z"
+                    }
+                ]
+            },
+            {
+                "image": [
+                    {
+                        "id": 320,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-01-25T09:18:03.000000Z",
+                        "updated_at": "2026-01-25T09:18:03.000000Z"
+                    },
+                    {
+                        "id": 321,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-01-25T09:18:08.000000Z",
+                        "updated_at": "2026-01-25T09:18:08.000000Z"
+                    }
+                ],
+                "ecommerce_image": []
+            },
+            {
+                "image": [
+                    {
+                        "id": 400,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-08-11T11:42:37.000000Z",
+                        "updated_at": "2026-08-11T11:42:37.000000Z"
+                    }
+                ],
+                "ecommerce_image": [
+                    {
+                        "id": 401,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-08-11T11:42:39.000000Z",
+                        "updated_at": "2026-08-11T11:42:39.000000Z"
+                    }
+                ]
+            },
+            {
+                "image": [
+                    {
+                        "id": 324,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-01-25T09:18:33.000000Z",
+                        "updated_at": "2026-01-25T09:18:33.000000Z"
+                    },
+                    {
+                        "id": 325,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-01-25T09:18:35.000000Z",
+                        "updated_at": "2026-01-25T09:18:35.000000Z"
+                    },
+                    {
+                        "id": 326,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-01-25T09:37:14.000000Z",
+                        "updated_at": "2026-01-25T09:37:14.000000Z"
+                    },
+                    {
+                        "id": 327,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-01-25T09:37:15.000000Z",
+                        "updated_at": "2026-01-25T09:37:15.000000Z"
+                    },
+                    {
+                        "id": 328,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-01-25T09:37:48.000000Z",
+                        "updated_at": "2026-01-25T09:37:48.000000Z"
+                    },
+                    {
+                        "id": 329,
+                        "file_path": "0",
+                        "alt_text": null,
+                        "created_at": "2026-01-25T09:37:52.000000Z",
+                        "updated_at": "2026-01-25T09:37:52.000000Z"
+                    }
+                ],
+                "ecommerce_image": []
+            },
+            {
+                "image": [
+                    {
+                        "id": 454,
+                        "file_path": "Ads/image/KPfv4jndFWsKDOSZOYIh3PvpUtXRtbbI3v2EQUnT.jpg",
+                        "alt_text": null,
+                        "created_at": "2026-09-01T08:04:46.000000Z",
+                        "updated_at": "2026-09-01T08:04:46.000000Z"
+                    }
+                ],
+                "ecommerce_image": [
+                    {
+                        "id": 455,
+                        "file_path": "ecommerce/Ads/image/0RgktjBRR8TpmrVHb2z4Ts7jBzwTuE4AZ5JTnSH5.jpg",
+                        "alt_text": null,
+                        "created_at": "2026-09-01T08:04:46.000000Z",
+                        "updated_at": "2026-09-01T08:04:46.000000Z"
+                    }
+                ]
+            },
+            {
+                "image": [
+                    {
+                        "id": 452,
+                        "file_path": "Ads/image/vuhwHllQpT7zivXCbVCJEbnO7tK0zpFY4UVv76ad.jpg",
+                        "alt_text": null,
+                        "created_at": "2026-09-01T08:01:23.000000Z",
+                        "updated_at": "2026-09-01T08:01:23.000000Z"
+                    }
+                ],
+                "ecommerce_image": [
+                    {
+                        "id": 453,
+                        "file_path": "ecommerce/Ads/image/9Z5uJFdRCGrghEdMDsw95n92lxmzor7xowjaYIfE.jpg",
+                        "alt_text": null,
+                        "created_at": "2026-09-01T08:01:25.000000Z",
+                        "updated_at": "2026-09-01T08:01:25.000000Z"
+                    }
+                ]
+            }
+        ],
+        "categories": {
+            "current_page": 1,
+            "data": [
+                {
+                    "id": 18,
+                    "name": "ملابس رجال ",
+                    "parent_id": null,
+                    "image": "Categories/images/6jmfQRd94ljMu5fnZETz2kBXAsmJ5O6UNXiBrh55.jpg",
+                    "dates": {
+                        "created_at": "2026-08-10T12:41:40.000000Z",
+                        "updated_at": "2026-08-10T12:41:40.000000Z"
+                    }
+                }
+            ],
+            "first_page_url": "http://localhost:9000/website/home/first/index?page=1",
+            "from": 1,
+            "last_page": 1,
+            "last_page_url": "http://localhost:9000/website/home/first/index?page=1",
+            "links": [
+                {
+                    "url": null,
+                    "label": "&laquo; Previous",
+                    "page": null,
+                    "active": false
+                },
+                {
+                    "url": "http://localhost:9000/website/home/first/index?page=1",
+                    "label": "1",
+                    "page": 1,
+                    "active": true
+                },
+                {
+                    "url": null,
+                    "label": "Next &raquo;",
+                    "page": null,
+                    "active": false
+                }
+            ],
+            "next_page_url": null,
+            "path": "http://localhost:9000/website/home/first/index",
+            "per_page": 20,
+            "prev_page_url": null,
+            "to": 1,
+            "total": 1
+        },
+        "supplier": {
+            "id": 65,
+            "name": "elalfy",
+            "description": null,
+            "email": "afj89cc8@gmail.com",
+            "phone": "+80104852511",
+            "prefix": "+80",
+            "status": "active",
+            "audience": "priv",
+            "balance": 0,
+            "image": {
+                "id": 136,
+                "file_path": "Suppliers/image/iXflq9vziMElvg2WarPTcT4jYvXhseno2KwTkn7K.jpg",
+                "alt_text": "ddd",
+                "created_at": "2025-09-21T12:41:36.000000Z",
+                "updated_at": "2025-09-21T12:41:36.000000Z"
+            },
+            "dates": {
+                "created_at": "2025-09-21T12:41:36.000000Z",
+                "updated_at": "2025-10-06T13:38:23.000000Z"
+            }
+        },
+        "products": [
+            {
+                "id": 124,
+                "name": "عرض",
+                "description": "وصف العرض",
+                "item_type": "product",
+                "slug": "c456c2aa-7932-4d24-999c-58d98b896c52",
+                "sku": "xxxxx3vv00 updateerrr",
+                "price": "2000.00",
+                "discount": "0.00",
+                "type": "general",
+                "units": "",
+                "points": 209,
+                "status": "published",
+                "is_favourite": 0,
+                "product_image": {
+                    "id": 251,
+                    "file_path": "products/main/4sEVITorKDOEj2Aisn6LKglJ38BoC4oL8GeYfsOM.jpg",
+                    "alt_text": "ddddupdateee",
+                    "created_at": "2025-11-16T14:12:25.000000Z",
+                    "updated_at": "2025-11-16T14:12:25.000000Z"
+                },
+                "is_packging": "1",
+                "packaging": null,
+                "variants": [
+                    {
+                        "id": 137,
+                        "extra_price": 1000,
+                        "stock": 1000,
+                        "is_default": "0",
+                        "sku": "10000",
+                        "applies_to": [],
+                        "images": [
+                            {
+                                "id": 181,
+                                "variant_id": 137,
+                                "file_path": "products/variants/137/ZZWSwTjLXf7A9gPPp17jBKI5bUA5gRrww2eRpOtf.jpg",
+                                "alt_text": "test",
+                                "sort_order": 1,
+                                "dates": {
+                                    "created_at": "2025-11-16T14:11:48.000000Z",
+                                    "updated_at": "2025-11-16T14:11:48.000000Z"
+                                }
+                            },
+                            {
+                                "id": 182,
+                                "variant_id": 137,
+                                "file_path": "products/variants/137/Wylvy6pRTjaJAjI7Ls2KmkdozvaEhwzIINznrY3u.jpg",
+                                "alt_text": "test 2",
+                                "sort_order": 2,
+                                "dates": {
+                                    "created_at": "2025-11-16T14:11:49.000000Z",
+                                    "updated_at": "2025-11-16T14:11:49.000000Z"
+                                }
+                            }
+                        ],
+                        "dates": {
+                            "expires_at": null,
+                            "created_at": "2025-11-16T11:51:35.000000Z",
+                            "updated_at": "2025-11-16T12:31:27.000000Z"
+                        }
+                    },
+                    {
+                        "id": 147,
+                        "extra_price": 30,
+                        "stock": 20,
+                        "is_default": "0",
+                        "sku": "RED-M",
+                        "applies_to": [
+                            {
+                                "id": 5,
+                                "product_option_id": 3,
+                                "value": "Test ProductOptionValue AR",
+                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                "updated_at": "2026-05-24T09:27:48.000000Z",
+                                "deleted_at": null,
+                                "product_option": {
+                                    "id": 3,
+                                    "name": "Test ProductOptions AR",
+                                    "values": [
+                                        {
+                                            "id": 5,
+                                            "product_option_id": 3,
+                                            "value": "Test ProductOptionValue AR",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2026-05-24T09:27:48.000000Z"
+                                            }
+                                        },
+                                        {
+                                            "id": 7,
+                                            "product_option_id": 3,
+                                            "value": "XL",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2025-11-09T12:15:46.000000Z"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "id": 7,
+                                "product_option_id": 3,
+                                "value": "XL",
+                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                "updated_at": "2025-11-09T12:15:46.000000Z",
+                                "deleted_at": null,
+                                "product_option": {
+                                    "id": 3,
+                                    "name": "Test ProductOptions AR",
+                                    "values": [
+                                        {
+                                            "id": 5,
+                                            "product_option_id": 3,
+                                            "value": "Test ProductOptionValue AR",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2026-05-24T09:27:48.000000Z"
+                                            }
+                                        },
+                                        {
+                                            "id": 7,
+                                            "product_option_id": 3,
+                                            "value": "XL",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2025-11-09T12:15:46.000000Z"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "images": [
+                            {
+                                "id": 180,
+                                "variant_id": 147,
+                                "file_path": "products/variants/147/n5gvOemVVVSLEzsJ44EaigpFPU5NWw9ycgYqbyHt.jpg",
+                                "alt_text": "Red Variant",
+                                "sort_order": 2,
+                                "dates": {
+                                    "created_at": "2025-11-16T14:07:21.000000Z",
+                                    "updated_at": "2025-11-16T14:07:21.000000Z"
+                                }
+                            },
+                            {
+                                "id": 183,
+                                "variant_id": 147,
+                                "file_path": "products/variants/147/EQPE0wDU4czt3hEmocORQaox7PkndLHlMthA0Qo1.jpg",
+                                "alt_text": "Red Variant",
+                                "sort_order": 2,
+                                "dates": {
+                                    "created_at": "2025-11-16T14:11:50.000000Z",
+                                    "updated_at": "2025-11-16T14:11:50.000000Z"
+                                }
+                            },
+                            {
+                                "id": 184,
+                                "variant_id": 147,
+                                "file_path": "products/variants/147/fUXgHt8dqAiHSTAlxkjRDDINpay2qQxarhGcS6N0.jpg",
+                                "alt_text": "Red Variant",
+                                "sort_order": 2,
+                                "dates": {
+                                    "created_at": "2025-11-16T14:12:02.000000Z",
+                                    "updated_at": "2025-11-16T14:12:02.000000Z"
+                                }
+                            },
+                            {
+                                "id": 185,
+                                "variant_id": 147,
+                                "file_path": "products/variants/147/lx1M2DLHtJWY6V5JCemkzgCTt680BszejhkJOte0.jpg",
+                                "alt_text": "Red Variant",
+                                "sort_order": 2,
+                                "dates": {
+                                    "created_at": "2025-11-16T14:12:26.000000Z",
+                                    "updated_at": "2025-11-16T14:12:26.000000Z"
+                                }
+                            }
+                        ],
+                        "dates": {
+                            "expires_at": null,
+                            "created_at": "2025-11-16T13:50:58.000000Z",
+                            "updated_at": "2025-11-16T13:50:58.000000Z"
+                        }
+                    }
+                ],
+                "reviews_count": 0,
+                "reviews_average": 0,
+                "dates": {
+                    "expires_at": null,
+                    "created_at": "2025-11-16T11:51:35.000000Z",
+                    "updated_at": "2025-11-16T14:12:25.000000Z"
+                }
+            },
+            {
+                "id": 134,
+                "name": "first prdouct",
+                "description": "teeeeesssssst",
+                "item_type": "product",
+                "slug": "0453a749-f082-455f-a2e8-0863c88adc7a",
+                "sku": "xxxxx3vv00",
+                "price": "1212.00",
+                "discount": "10.00",
+                "type": "general",
+                "units": "6",
+                "points": 20,
+                "status": "published",
+                "is_favourite": 0,
+                "product_image": {
+                    "id": 385,
+                    "file_path": "0",
+                    "alt_text": "dddd",
+                    "created_at": "2026-07-05T13:55:47.000000Z",
+                    "updated_at": "2026-07-05T13:55:47.000000Z"
+                },
+                "is_packging": null,
+                "packaging": null,
+                "variants": [
+                    {
+                        "id": 164,
+                        "extra_price": 30,
+                        "stock": 10,
+                        "is_default": "1",
+                        "sku": "13030",
+                        "applies_to": [
+                            {
+                                "id": 5,
+                                "product_option_id": 3,
+                                "value": "Test ProductOptionValue AR",
+                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                "updated_at": "2026-05-24T09:27:48.000000Z",
+                                "deleted_at": null,
+                                "product_option": {
+                                    "id": 3,
+                                    "name": "Test ProductOptions AR",
+                                    "values": [
+                                        {
+                                            "id": 5,
+                                            "product_option_id": 3,
+                                            "value": "Test ProductOptionValue AR",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2026-05-24T09:27:48.000000Z"
+                                            }
+                                        },
+                                        {
+                                            "id": 7,
+                                            "product_option_id": 3,
+                                            "value": "XL",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2025-11-09T12:15:46.000000Z"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "images": [
+                            {
+                                "id": 190,
+                                "variant_id": 164,
+                                "file_path": "0",
+                                "alt_text": "test",
+                                "sort_order": 1,
+                                "dates": {
+                                    "created_at": "2026-07-05T13:55:47.000000Z",
+                                    "updated_at": "2026-07-05T13:55:47.000000Z"
+                                }
+                            }
+                        ],
+                        "dates": {
+                            "expires_at": null,
+                            "created_at": "2026-07-05T13:55:47.000000Z",
+                            "updated_at": "2026-07-05T13:55:47.000000Z"
+                        }
+                    }
+                ],
+                "reviews_count": 0,
+                "reviews_average": 0,
+                "dates": {
+                    "expires_at": null,
+                    "created_at": "2026-07-05T13:55:47.000000Z",
+                    "updated_at": "2026-07-05T13:55:47.000000Z"
+                }
+            },
+            {
+                "id": 139,
+                "name": "first prdouct",
+                "description": "teeeeesssssst",
+                "item_type": "product",
+                "slug": "3f45923d-8817-4cef-9bb3-11fca49abe83",
+                "sku": "xxxxx3vv00",
+                "price": "1212.00",
+                "discount": "10.00",
+                "type": "general",
+                "units": "6",
+                "points": 20,
+                "status": "published",
+                "is_favourite": 0,
+                "product_image": {
+                    "id": 388,
+                    "file_path": "0",
+                    "alt_text": "dddd",
+                    "created_at": "2026-07-06T07:14:19.000000Z",
+                    "updated_at": "2026-07-06T07:14:19.000000Z"
+                },
+                "is_packging": null,
+                "packaging": "كرتونة",
+                "variants": [
+                    {
+                        "id": 166,
+                        "extra_price": 30,
+                        "stock": 10,
+                        "is_default": "1",
+                        "sku": "13030",
+                        "applies_to": [
+                            {
+                                "id": 5,
+                                "product_option_id": 3,
+                                "value": "Test ProductOptionValue AR",
+                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                "updated_at": "2026-05-24T09:27:48.000000Z",
+                                "deleted_at": null,
+                                "product_option": {
+                                    "id": 3,
+                                    "name": "Test ProductOptions AR",
+                                    "values": [
+                                        {
+                                            "id": 5,
+                                            "product_option_id": 3,
+                                            "value": "Test ProductOptionValue AR",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2026-05-24T09:27:48.000000Z"
+                                            }
+                                        },
+                                        {
+                                            "id": 7,
+                                            "product_option_id": 3,
+                                            "value": "XL",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2025-11-09T12:15:46.000000Z"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "images": [
+                            {
+                                "id": 192,
+                                "variant_id": 166,
+                                "file_path": "0",
+                                "alt_text": "test",
+                                "sort_order": 1,
+                                "dates": {
+                                    "created_at": "2026-07-06T07:14:19.000000Z",
+                                    "updated_at": "2026-07-06T07:14:19.000000Z"
+                                }
+                            }
+                        ],
+                        "dates": {
+                            "expires_at": null,
+                            "created_at": "2026-07-06T07:14:19.000000Z",
+                            "updated_at": "2026-07-06T07:14:19.000000Z"
+                        }
+                    }
+                ],
+                "reviews_count": 0,
+                "reviews_average": 0,
+                "dates": {
+                    "expires_at": null,
+                    "created_at": "2026-07-06T07:14:19.000000Z",
+                    "updated_at": "2026-07-06T07:14:19.000000Z"
+                }
+            },
+            {
+                "id": 141,
+                "name": "first prdouct",
+                "description": "teeeeesssssst",
+                "item_type": "product",
+                "slug": "92322661-e059-46c8-8364-1daae1743d5f",
+                "sku": "xxxxx3vv00",
+                "price": "1212.00",
+                "discount": "10.00",
+                "type": "general",
+                "units": "6",
+                "points": 20,
+                "status": "published",
+                "is_favourite": 0,
+                "product_image": {
+                    "id": 390,
+                    "file_path": "0",
+                    "alt_text": "dddd",
+                    "created_at": "2026-07-08T11:34:27.000000Z",
+                    "updated_at": "2026-07-08T11:34:27.000000Z"
+                },
+                "is_packging": null,
+                "packaging": "كرتونة",
+                "variants": [
+                    {
+                        "id": 168,
+                        "extra_price": 30,
+                        "stock": 10,
+                        "is_default": "1",
+                        "sku": "13030",
+                        "applies_to": [
+                            {
+                                "id": 5,
+                                "product_option_id": 3,
+                                "value": "Test ProductOptionValue AR",
+                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                "updated_at": "2026-05-24T09:27:48.000000Z",
+                                "deleted_at": null,
+                                "product_option": {
+                                    "id": 3,
+                                    "name": "Test ProductOptions AR",
+                                    "values": [
+                                        {
+                                            "id": 5,
+                                            "product_option_id": 3,
+                                            "value": "Test ProductOptionValue AR",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2026-05-24T09:27:48.000000Z"
+                                            }
+                                        },
+                                        {
+                                            "id": 7,
+                                            "product_option_id": 3,
+                                            "value": "XL",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2025-11-09T12:15:46.000000Z"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "images": [
+                            {
+                                "id": 194,
+                                "variant_id": 168,
+                                "file_path": "0",
+                                "alt_text": "test",
+                                "sort_order": 1,
+                                "dates": {
+                                    "created_at": "2026-07-08T11:34:28.000000Z",
+                                    "updated_at": "2026-07-08T11:34:28.000000Z"
+                                }
+                            }
+                        ],
+                        "dates": {
+                            "expires_at": null,
+                            "created_at": "2026-07-08T11:34:27.000000Z",
+                            "updated_at": "2026-07-08T11:34:27.000000Z"
+                        }
+                    }
+                ],
+                "reviews_count": 0,
+                "reviews_average": 0,
+                "dates": {
+                    "expires_at": null,
+                    "created_at": "2026-07-08T11:34:27.000000Z",
+                    "updated_at": "2026-07-08T11:34:27.000000Z"
+                }
+            },
+            {
+                "id": 135,
+                "name": "first prdouct",
+                "description": "teeeeesssssst",
+                "item_type": "product",
+                "slug": "aa04e868-0072-4620-80bc-71669940da4b",
+                "sku": "xxxxx3vv00",
+                "price": "1212.00",
+                "discount": "10.00",
+                "type": "general",
+                "units": "6",
+                "points": 20,
+                "status": "published",
+                "is_favourite": 0,
+                "product_image": {
+                    "id": 386,
+                    "file_path": "0",
+                    "alt_text": "dddd",
+                    "created_at": "2026-07-05T13:56:32.000000Z",
+                    "updated_at": "2026-07-05T13:56:32.000000Z"
+                },
+                "is_packging": null,
+                "packaging": null,
+                "variants": [
+                    {
+                        "id": 165,
+                        "extra_price": 30,
+                        "stock": 10,
+                        "is_default": "1",
+                        "sku": "13030",
+                        "applies_to": [
+                            {
+                                "id": 5,
+                                "product_option_id": 3,
+                                "value": "Test ProductOptionValue AR",
+                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                "updated_at": "2026-05-24T09:27:48.000000Z",
+                                "deleted_at": null,
+                                "product_option": {
+                                    "id": 3,
+                                    "name": "Test ProductOptions AR",
+                                    "values": [
+                                        {
+                                            "id": 5,
+                                            "product_option_id": 3,
+                                            "value": "Test ProductOptionValue AR",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2026-05-24T09:27:48.000000Z"
+                                            }
+                                        },
+                                        {
+                                            "id": 7,
+                                            "product_option_id": 3,
+                                            "value": "XL",
+                                            "dates": {
+                                                "created_at": "2025-11-09T12:15:46.000000Z",
+                                                "updated_at": "2025-11-09T12:15:46.000000Z"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "images": [
+                            {
+                                "id": 191,
+                                "variant_id": 165,
+                                "file_path": "0",
+                                "alt_text": "test",
+                                "sort_order": 1,
+                                "dates": {
+                                    "created_at": "2026-07-05T13:56:32.000000Z",
+                                    "updated_at": "2026-07-05T13:56:32.000000Z"
+                                }
+                            }
+                        ],
+                        "dates": {
+                            "expires_at": null,
+                            "created_at": "2026-07-05T13:56:32.000000Z",
+                            "updated_at": "2026-07-05T13:56:32.000000Z"
+                        }
+                    }
+                ],
+                "reviews_count": 0,
+                "reviews_average": 0,
+                "dates": {
+                    "expires_at": null,
+                    "created_at": "2026-07-05T13:56:32.000000Z",
+                    "updated_at": "2026-07-05T13:56:32.000000Z"
+                }
+            },
+            {
+                "id": 112,
+                "name": "elalfy",
+                "description": "mam_itemsmam_itemsmam_itemsmam_itemsmam_itemsmam_itemsmam_itemsmam_itemsmam_items",
+                "item_type": "product",
+                "slug": "mam_itemsmam_items",
+                "sku": "mam_itemsmam_items",
+                "price": "131.00",
+                "discount": "50.00",
+                "type": "wholesalers",
+                "units": "",
+                "points": 12,
+                "status": "published",
+                "is_favourite": 0,
+                "product_image": {
+                    "id": 30,
+                    "file_path": "Client/image/o0QqoRPAhhSfyUGXFlZBfgQ05vkEnX2iZYFnlVm1.jpg",
+                    "alt_text": null,
+                    "created_at": "2025-08-14T22:24:34.000000Z",
+                    "updated_at": "2025-08-14T22:24:39.000000Z"
+                },
+                "is_packging": "1",
+                "packaging": null,
+                "variants": [
+                    {
+                        "id": 119,
+                        "extra_price": 120,
+                        "stock": 1333,
+                        "is_default": "0",
+                        "sku": "12121",
+                        "applies_to": [],
+                        "images": [],
+                        "dates": {
+                            "expires_at": null,
+                            "created_at": "2025-11-09T08:40:23.000000Z",
+                            "updated_at": "2025-11-09T08:40:23.000000Z"
+                        }
+                    }
+                ],
+                "reviews_count": 1,
+                "reviews_average": 1,
+                "dates": {
+                    "expires_at": "2027-12-31",
+                    "created_at": "2025-11-04T06:29:40.000000Z",
+                    "updated_at": "2025-11-04T06:29:40.000000Z"
+                }
+            }
+        ],
+        "Mam": [
+            {
+                "id": 17,
+                "name": "Test MixandMatch EN",
+                "description": "elalfyelalfyelalfy",
+                "slug": "first_mix",
+                "discount": "12.00",
+                "status": "published",
+                "is_favourite": 0,
+                "reviews_count": 0,
+                "reviews_average": 0,
+                "created_at": "2025-11-04T06:27:27.000000Z",
+                "updated_at": "2026-05-24T09:27:48.000000Z",
+                "deleted_at": null
+            },
+            {
+                "id": 100,
+                "name": "max&match",
+                "description": "products",
+                "slug": "9fe83b6f-bc4a-4e91-a1e3-9a40d827fcdd",
+                "discount": "20.00",
+                "status": "published",
+                "is_favourite": 0,
+                "reviews_count": 0,
+                "reviews_average": 0,
+                "created_at": "2026-05-17T13:32:18.000000Z",
+                "updated_at": "2026-05-17T13:32:18.000000Z",
+                "deleted_at": null
+            }
+        ],
+        "pick_match": true
+    },
+    "cache": [],
+    "is_auth": true
+}
