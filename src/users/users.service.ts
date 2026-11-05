@@ -25,7 +25,10 @@ export class UsersService {
 
         if (foundUserInDatabase){ throw new BadRequestException("User Already exist ")};
 
-        const hashPassword= await bcrypt.hash(password,process.env.BCRYPT_SECRET as string);
+        const hashPassword = await bcrypt.hash(
+            password,
+            Number(process.env.BCRYPT_SALT_ROUNDS)
+        );
 
         const newUser= await this.userRespository.save({
             email,
@@ -55,11 +58,14 @@ export class UsersService {
     }
 
     async getInformationOfUser(payloads:JWTPayload){
-        console.log("payloads",payloads)
         const user = await this.userRespository.findOne({where:{id:payloads?.id}});
         if(!user) throw new NotFoundException("User Not Found");
 
         return user;
+    }
+
+    async getAllUsers(){
+        return await this.userRespository.find();
     }
 
     private async generateJWT(payload:JWTPayload):Promise<string>{

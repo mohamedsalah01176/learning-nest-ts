@@ -7,6 +7,9 @@ import { UppercasePipe } from '../pipes/uppercase/uppercase.pipe.js';
 import { LoginUserDTO } from './dto/login.dto.js';
 import { getUserPayload } from '../decorators/users/getUserPayload.js';
 import { AuthGuard } from '../guards/auth.guard.js';
+import { Roles } from '../decorators/roles/roles.decorator.js';
+import { RoleSystem } from '../decorators/roles/roles.enums.js';
+import { RolesGuard } from '../guards/roles.guard.js';
 
 
 
@@ -31,6 +34,13 @@ export class UsersController {
     @UseGuards(AuthGuard)
     async getUser(@getUserPayload() userPaylod:JWTPayload){
      return await this.UsersService.getInformationOfUser(userPaylod);
+    }
+
+    @Get("all-user")
+    @Roles([RoleSystem.Admin])
+    @UseGuards(AuthGuard,RolesGuard)
+    async getAllUsers(){
+     return await this.UsersService.getAllUsers();
     }
 
     // @Get()
