@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException , NotFoundException } from '@nestjs/common';
+import { Injectable, BadRequestException , NotFoundException, ForbiddenException } from '@nestjs/common';
 import { IUser, JWTPayload } from './interfaces.js';
 import { CreateUserDTO } from './dto/create-user.dto.js';
 import { Repository } from 'typeorm';
@@ -7,6 +7,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import bcrypt from 'bcryptjs';
 import { LoginUserDTO } from './dto/login.dto.js';
 import {JwtService} from "@nestjs/jwt"
+import { UpdateUserDTO } from './dto/update-user.dto.js';
+import { JwtPayload } from 'jsonwebtoken';
+import { RoleSystem } from '../decorators/roles/roles.enums.js';
 
 
 @Injectable()
@@ -25,14 +28,10 @@ export class UsersService {
 
         if (foundUserInDatabase){ throw new BadRequestException("User Already exist ")};
 
-        const hashPassword = await bcrypt.hash(
-            password,
-            Number(process.env.BCRYPT_SALT_ROUNDS)
-        );
-
+       
         const newUser= await this.userRespository.save({
             email,
-            password:hashPassword,
+            password:await this.generateHashPassword(password) ,
             name
         })
 
@@ -57,8 +56,8 @@ export class UsersService {
        return {accessToken}
     }
 
-    async getInformationOfUser(payloads:JWTPayload){
-        const user = await this.userRespository.findOne({where:{id:payloads?.id}});
+    async getInformationOfUser(id:number){
+        const user = await this.userRespository.findOne({where:{id}});
         if(!user) throw new NotFoundException("User Not Found");
 
         return user;
@@ -68,8 +67,48 @@ export class UsersService {
         return await this.userRespository.find();
     }
 
+    async updateUser(id:number,body:UpdateUserDTO){
+
+        try{
+
+            const {name , password} = body;
+            const user =  await this.getInformationOfUser(id);
+
+            if(!user) throw new NotFoundException("User Not Found");
+
+            if (name) user.name = name;
+
+            if(password) {
+                user.password = await this.generateHashPassword(password)
+            }
+
+            return this.userRespository.save(user)
+
+        }catch(error){
+            return error
+        }
+    }
+
+    async deleteUser(id:number,payload:JwtPayload){
+        const user = await this.getInformationOfUser(id);
+ 
+
+        if(user?.id === payload.id || payload.role === RoleSystem.Admin) {
+            await this.userRespository.remove(user);
+            return {message:"Users Deleted"}
+        }
+        throw new ForbiddenException("access denied, you are not allowed");
+
+    }
+
     private async generateJWT(payload:JWTPayload):Promise<string>{
         return await this.jwtSefrvice.sign(payload)
+    }
+
+
+    private async generateHashPassword(password:string){
+
+        return await bcrypt.hash(password,Number(process.env.BCRYPT_SALT_ROUNDS))
     }
 
 

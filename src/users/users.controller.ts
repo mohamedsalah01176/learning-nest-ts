@@ -33,7 +33,7 @@ export class UsersController {
     @Get("me")
     @UseGuards(AuthGuard)
     async getUser(@getUserPayload() userPaylod:JWTPayload){
-     return await this.UsersService.getInformationOfUser(userPaylod);
+     return await this.UsersService.getInformationOfUser(userPaylod.id as number);
     }
 
     @Get("all-user")
@@ -41,6 +41,18 @@ export class UsersController {
     @UseGuards(AuthGuard,RolesGuard)
     async getAllUsers(){
      return await this.UsersService.getAllUsers();
+    }
+
+    @Put("")
+    @UseGuards(AuthGuard)
+    async updateUserControle(@getUserPayload() payload:JWTPayload,@Body() body:UpdateUserDTO){
+          return await this.UsersService.updateUser(payload.id as number,body)
+    }
+
+    @Delete(":id")
+    @UseGuards(AuthGuard)
+    async deleteUser(@Param("id",ParseIntPipe) id:number ,@getUserPayload() body:JWTPayload){
+     return await this.UsersService.deleteUser(id,body)
     }
 
     // @Get()
