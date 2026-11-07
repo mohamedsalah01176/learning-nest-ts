@@ -4,7 +4,7 @@ import { UpdateProductDto } from './dto/update-product.dto.js';
 import { PersonsService } from '../persons/persons.service.js';
 import { ReviewsService } from '../reviews/reviews.service.js';
 import { UsersService } from '../users/users.service.js';
-import { Repository } from 'typeorm';
+import { Between, Like, Repository } from 'typeorm';
 import { Product } from './entities/product.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JWTPayload } from '../users/interfaces.js';
@@ -32,9 +32,13 @@ constructor(
     return await this.productRepository.save(product)
   }
 
-  async findAll() {
-    return await this.productRepository.find()
+  async findAll(name?:string,minPrice?:number,maxPrice?:number) {
 
+    const filters={
+      ...(name?{name:Like(`%${name}%`)}:{}),
+      ...(minPrice && maxPrice?{price:Between(minPrice,maxPrice)}:{})
+    }
+    return await this.productRepository.find({where:{...filters}})
   }
 
   async findOne(id: number) {
