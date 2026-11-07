@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { ClassSerializerInterceptor, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { createObserveModule } from '@nestjs/observe';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
@@ -14,6 +14,7 @@ import { User } from './users/entities/users.entity.js';
 import { Product } from './products/entities/product.entity.js';
 import { Review } from './reviews/entities/review.entity.js';
 import { UserDetails } from './users/entities/userDetails.entity.js';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -54,7 +55,10 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     })
   ],
   controllers: [AppController],
-  providers: [AppService],  
+  providers: [AppService ,{
+    provide:APP_INTERCEPTOR,
+    useClass:ClassSerializerInterceptor
+  }],  
   
 })
 export class AppModule implements NestModule {

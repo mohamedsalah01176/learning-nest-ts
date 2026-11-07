@@ -10,6 +10,7 @@ import {JwtService} from "@nestjs/jwt"
 import { UpdateUserDTO } from './dto/update-user.dto.js';
 import { JwtPayload } from 'jsonwebtoken';
 import { RoleSystem } from '../decorators/roles/roles.enums.js';
+import { AuthService } from './auth.service.js';
 
 
 @Injectable()
@@ -17,44 +18,10 @@ export class UsersService {
 
     constructor(
         @InjectRepository(User) private readonly userRespository:Repository<User>,
-        private readonly jwtSefrvice:JwtService
+        private readonly authService:AuthService
     ){}
     
 
-    async Register(body:CreateUserDTO):Promise<{accessToken:string}>{
-        const {email ,password ,name}=body;
-
-        const foundUserInDatabase= await this.userRespository.findOne({where:{email}});
-
-        if (foundUserInDatabase){ throw new BadRequestException("User Already exist ")};
-
-       
-        const newUser= await this.userRespository.save({
-            email,
-            password:await this.generateHashPassword(password) ,
-            name
-        })
-
-        const accessToken= await this.generateJWT({id:newUser.id,name:newUser.name,email:newUser.email});
-
-        return {accessToken}
-
-    }
-
-
-    async login(body:LoginUserDTO):Promise<{accessToken:string}>{
-
-        const {email,password}=body;
-
-        const user=await this.userRespository.findOne({where:{email}});
-        if(!user) throw new BadRequestException("Email or password incorrect");
-        
-        const comparePassword = bcrypt.compare(password,user.password);
-        if(!comparePassword) throw new BadRequestException("Email or password incorrect");
-
-        const accessToken= await this.generateJWT({id:user.id,name:user.name,email:user.email}); 
-       return {accessToken}
-    }
 
     async getInformationOfUser(id:number){
         const user = await this.userRespository.findOne({where:{id}});
@@ -79,7 +46,7 @@ export class UsersService {
             if (name) user.name = name;
 
             if(password) {
-                user.password = await this.generateHashPassword(password)
+                user.password = await this.authService.generateHashPassword(password)
             }
 
             return this.userRespository.save(user)
@@ -101,15 +68,7 @@ export class UsersService {
 
     }
 
-    private async generateJWT(payload:JWTPayload):Promise<string>{
-        return await this.jwtSefrvice.sign(payload)
-    }
-
-
-    private async generateHashPassword(password:string){
-
-        return await bcrypt.hash(password,Number(process.env.BCRYPT_SALT_ROUNDS))
-    }
+    
 
 
 

@@ -46,7 +46,7 @@ export class RolesGuard implements CanActivate{
     
     if(!roles || roles.length === 0) return false
 
-    const user= await this.usersService.getInformationOfUser(reqUser);
+    const user= await this.usersService.getInformationOfUser(reqUser.id);
 
     if(!user) return false;
     if(!roles.includes(user.role)) return false

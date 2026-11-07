@@ -3,6 +3,7 @@ import type { UserDetails } from "./userDetails.entity.js";
 import { RoleSystem } from "../../decorators/roles/roles.enums.js";
 import type { Product } from "../../products/entities/product.entity.js";
 import type { Review } from "../../reviews/entities/review.entity.js";
+import { Exclude } from "class-transformer";
 
 
 
@@ -27,6 +28,7 @@ export class User{
         length:100,
         nullable:false
     })
+    @Exclude()
     password:string;
 
     @OneToOne("UserDetails", "user", {

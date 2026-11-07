@@ -10,6 +10,7 @@ import { AuthGuard } from '../guards/auth.guard.js';
 import { Roles } from '../decorators/roles/roles.decorator.js';
 import { RoleSystem } from '../decorators/roles/roles.enums.js';
 import { RolesGuard } from '../guards/roles.guard.js';
+import { AuthService } from './auth.service.js';
 
 
 
@@ -17,42 +18,42 @@ import { RolesGuard } from '../guards/roles.guard.js';
 
 @Controller('api/users')
 export class UsersController {
-    constructor(private UsersService:UsersService){}
+    constructor(private readonly usersService:UsersService , private readonly authService:AuthService ){}
 
     @Post("auth/register")
     async register( @Body() body:CreateUserDTO){
-         return this.UsersService.Register(body);     
+         return this.authService.Register(body);     
     }
     
     @Post("auth/login")
     @HttpCode(HttpStatus.OK)
     async login( @Body() body:LoginUserDTO){
-         return this.UsersService.login(body);     
+         return this.authService.login(body);     
     }
 
     @Get("me")
     @UseGuards(AuthGuard)
     async getUser(@getUserPayload() userPaylod:JWTPayload){
-     return await this.UsersService.getInformationOfUser(userPaylod.id as number);
+     return await this.usersService.getInformationOfUser(userPaylod.id as number);
     }
 
     @Get("all-user")
     @Roles([RoleSystem.Admin])
     @UseGuards(AuthGuard,RolesGuard)
     async getAllUsers(){
-     return await this.UsersService.getAllUsers();
+     return await this.usersService.getAllUsers();
     }
 
     @Put("")
     @UseGuards(AuthGuard)
     async updateUserControle(@getUserPayload() payload:JWTPayload,@Body() body:UpdateUserDTO){
-          return await this.UsersService.updateUser(payload.id as number,body)
+          return await this.usersService.updateUser(payload.id as number,body)
     }
 
     @Delete(":id")
     @UseGuards(AuthGuard)
     async deleteUser(@Param("id",ParseIntPipe) id:number ,@getUserPayload() body:JWTPayload){
-     return await this.UsersService.deleteUser(id,body)
+     return await this.usersService.deleteUser(id,body)
     }
 
     // @Get()

@@ -1,37 +1,78 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { ForbiddenException, forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto.js';
 import { UpdateProductDto } from './dto/update-product.dto.js';
 import { PersonsService } from '../persons/persons.service.js';
 import { ReviewsService } from '../reviews/reviews.service.js';
+import { UsersService } from '../users/users.service.js';
+import { Repository } from 'typeorm';
+import { Product } from './entities/product.entity.js';
+import { InjectRepository } from '@nestjs/typeorm';
+import { JWTPayload } from '../users/interfaces.js';
+import { RoleSystem } from '../decorators/roles/roles.enums.js';
 
 @Injectable()
 export class ProductsService {
 
 constructor(
-  private readonly personService: PersonsService,
+  private readonly productRepositorypersonService: PersonsService,
   @Inject(forwardRef(() => ReviewsService))
   private readonly reviewService: ReviewsService,
+  private readonly usersService:UsersService,
+  @InjectRepository(Product) private readonly productRepository:Repository<Product>
 ) {}
 
-  create(createProductDto: CreateProductDto) {
+  async create(body: CreateProductDto,userId:number) {
     
-    return 'This action adds a new product' ;
+    const user = await this.usersService.getInformationOfUser(userId);
+
+    const product= await this.productRepository.create({
+      ...body,
+      user
+    })
+    return await this.productRepository.save(product)
   }
 
-  findAll() {
-    const persons=this.personService.findAll()
-    return `This action returns all products ` + persons;
+  async findAll() {
+    return await this.productRepository.find()
+
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number) {
+    const product= await this.productRepository.findOne({where:{id},relations:{user:true}})
+    if(!product) throw new NotFoundException("Product Not Found");
+    return product;
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async update(id: number, body: UpdateProductDto,payload:JWTPayload) {
+      console.log('DTO:', body);
+
+    const product = await this.checkProductAccess(id,payload)
+
+    this.productRepository.merge(product, body);
+
+    return await this.productRepository.save(product);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(id: number,payload:JWTPayload) {
+    const product = await this.checkProductAccess(id,payload);
+
+    return this.productRepository.remove(product);
   }
+
+
+  private async checkProductAccess(id: number, payload: JWTPayload){
+    const product = await this.findOne(id);
+
+    const isAdmin = payload.role === RoleSystem.Admin;
+    const isOwner = payload.id === product.user.id;
+
+    if (!isAdmin && !isOwner)  
+      throw new ForbiddenException(
+        'You are not allowed to modify this product',
+      );
+
+    return product
+  }
+
+  
 }

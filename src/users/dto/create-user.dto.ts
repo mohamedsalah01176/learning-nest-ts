@@ -1,4 +1,4 @@
-import { Type } from "class-transformer";
+import {  Type } from "class-transformer";
 import { IsNotEmpty, Min ,Max , Length ,IsEmail ,IsNotEmptyObject , ValidateNested , IsInt, IsString, MinLength, MaxLength, IsOptional} from "class-validator";
 
 export class DetailsUserDTO{

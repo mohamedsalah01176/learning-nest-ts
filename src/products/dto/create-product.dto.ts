@@ -6,7 +6,9 @@ import {
   IsOptional,
   Min,
   MaxLength,
+  IsBoolean,
 } from 'class-validator';
+import { Column } from 'typeorm';
 
 export class CreateProductDto {
   @IsString()
@@ -26,4 +28,8 @@ export class CreateProductDto {
   @IsNumber()
   @Min(0)
   stock?: number;
+
+  @Column({default:true})
+  @IsBoolean()
+  isActive:boolean
 }
