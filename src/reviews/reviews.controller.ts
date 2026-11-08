@@ -5,6 +5,9 @@ import { UpdateReviewDto } from './dto/update-review.dto.js';
 import { getUserPayload } from '../decorators/users/getUserPayload.js';
 import type { JWTPayload } from '../users/interfaces.js';
 import { AuthGuard } from '../guards/auth.guard.js';
+import { RolesGuard } from '../guards/roles.guard.js';
+import { Roles } from '../decorators/roles/roles.decorator.js';
+import { RoleSystem } from '../decorators/roles/roles.enums.js';
 
 @Controller('api/reviews')
 @UseGuards(AuthGuard)
@@ -17,22 +20,20 @@ export class ReviewsController {
   }
 
   @Get()
+  @Roles([RoleSystem.Admin])
+  @UseGuards(RolesGuard)
   findAll() {
-    return this.reviewsService.findAll();
+    return this.reviewsService.getAllReviews();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.reviewsService.findOne(+id);
-  }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReviewDto: UpdateReviewDto) {
-    return this.reviewsService.update(+id, updateReviewDto);
+  update(@Param('id',ParseIntPipe) id: number, @getUserPayload() payload:JWTPayload, @Body() updateReviewDto: UpdateReviewDto) {
+    return this.reviewsService.updateReview(id,payload.id as number, updateReviewDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.reviewsService.remove(+id);
+  remove(@Param('id',ParseIntPipe) id: number, @getUserPayload() payload:JWTPayload) {
+    return this.reviewsService.deleteReview(id,payload.id as number);
   }
 }
