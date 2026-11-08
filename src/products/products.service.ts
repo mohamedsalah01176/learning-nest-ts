@@ -1,8 +1,6 @@
 import { ForbiddenException, forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto.js';
 import { UpdateProductDto } from './dto/update-product.dto.js';
-import { PersonsService } from '../persons/persons.service.js';
-import { ReviewsService } from '../reviews/reviews.service.js';
 import { UsersService } from '../users/users.service.js';
 import { Between, Like, Repository } from 'typeorm';
 import { Product } from './entities/product.entity.js';
@@ -14,9 +12,6 @@ import { RoleSystem } from '../decorators/roles/roles.enums.js';
 export class ProductsService {
 
 constructor(
-  private readonly productRepositorypersonService: PersonsService,
-  @Inject(forwardRef(() => ReviewsService))
-  private readonly reviewService: ReviewsService,
   private readonly usersService:UsersService,
   @InjectRepository(Product) private readonly productRepository:Repository<Product>
 ) {}

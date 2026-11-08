@@ -15,8 +15,8 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
-  @Roles([RoleSystem.Admin])
-  @UseGuards(RolesGuard)
+  // @Roles([RoleSystem.Admin])
+  // @UseGuards(RolesGuard)
   async create(@Body() createProductDto: CreateProductDto, @getUserPayload() payload:JWTPayload) {
     return this.productsService.create(createProductDto,payload.id as number);
   }

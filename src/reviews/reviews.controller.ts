@@ -1,15 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller ,UseGuards , ParseIntPipe, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ReviewsService } from './reviews.service.js';
 import { CreateReviewDto } from './dto/create-review.dto.js';
 import { UpdateReviewDto } from './dto/update-review.dto.js';
+import { getUserPayload } from '../decorators/users/getUserPayload.js';
+import type { JWTPayload } from '../users/interfaces.js';
+import { AuthGuard } from '../guards/auth.guard.js';
 
-@Controller('reviews')
+@Controller('api/reviews')
+@UseGuards(AuthGuard)
 export class ReviewsController {
   constructor(private readonly reviewsService: ReviewsService) {}
 
-  @Post()
-  create(@Body() createReviewDto: CreateReviewDto) {
-    return this.reviewsService.create(createReviewDto);
+  @Post(":id")
+  create(@Body() createReviewDto: CreateReviewDto,@getUserPayload() payload:JWTPayload,@Param("id",ParseIntPipe) productId:number) {
+    return this.reviewsService.create(createReviewDto,payload.id as number,productId);
   }
 
   @Get()
