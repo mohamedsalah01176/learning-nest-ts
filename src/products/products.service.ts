@@ -27,13 +27,17 @@ constructor(
     return await this.productRepository.save(product)
   }
 
-  async findAll(name?:string,minPrice?:number,maxPrice?:number) {
+  async findAll(name?:string,minPrice?:number,maxPrice?:number,pageNumber?:number,perPage?:number) {
 
     const filters={
       ...(name?{name:Like(`%${name}%`)}:{}),
       ...(minPrice && maxPrice?{price:Between(minPrice,maxPrice)}:{})
     }
-    return await this.productRepository.find({where:{...filters}})
+    return await this.productRepository.find({
+      where:{...filters},
+      skip:(perPage as number) * ((pageNumber as number) - 1),
+      take:perPage
+    })
   }
 
   async findOne(id: number) {

@@ -26,8 +26,10 @@ export class ProductsController {
     @Query("name") name?:string,
     @Query("minPrice",new DefaultValuePipe(0),ParseIntPipe) minPrice?:number,
     @Query("maxPrice", new DefaultValuePipe(999999),ParseIntPipe) maxPrice?:number,
+    @Query("pageNumber",new DefaultValuePipe(1),ParseIntPipe) pageNumber?:number,
+    @Query("perPage",new DefaultValuePipe(20),ParseIntPipe) perPage?:number,
   ) {
-    return this.productsService.findAll(name,minPrice,maxPrice);
+    return this.productsService.findAll(name,minPrice,maxPrice,pageNumber,perPage);
   }
 
   @Get(':id')
