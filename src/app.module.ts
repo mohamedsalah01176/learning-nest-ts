@@ -15,6 +15,7 @@ import { Product } from './products/entities/product.entity.js';
 import { Review } from './reviews/entities/review.entity.js';
 import { UserDetails } from './users/entities/userDetails.entity.js';
 import { APP_INTERCEPTOR } from '@nestjs/core';
+import { UploadsModule } from './uploads/uploads.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -52,7 +53,8 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     ConfigModule.forRoot({
       isGlobal:true,
       envFilePath:`.env.${process.env.NODE_ENV || 'development'}`
-    })
+    }),
+    UploadsModule
   ],
   controllers: [AppController],
   providers: [AppService ,{
