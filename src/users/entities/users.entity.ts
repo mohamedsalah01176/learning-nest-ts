@@ -23,6 +23,9 @@ export class User{
     })
     email:string;
 
+    @Column({ type: "varchar",nullable:true,default:null})
+    imageProfile?:string | null
+
     @Column({
         type:"varchar",
         length:100,
