@@ -1,9 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, Put , ParseIntPipe , UseGuards, UsePipes, ValidationPipe, HttpCode , HttpStatus} from '@nestjs/common';
-import type  { IUser, JWTPayload } from './interfaces.js';
+import { Body,NotFoundException,UploadedFile, BadRequestException,UseInterceptors, Controller, Delete, Get, Param, Post, Put , ParseIntPipe , UseGuards, UsePipes, ValidationPipe, HttpCode , HttpStatus} from '@nestjs/common';
+import type  {  JWTPayload } from './interfaces.js';
 import { UsersService } from './users.service.js';
 import { CreateUserDTO } from './dto/create-user.dto.js';
 import { UpdateUserDTO } from './dto/update-user.dto.js';
-import { UppercasePipe } from '../pipes/uppercase/uppercase.pipe.js';
 import { LoginUserDTO } from './dto/login.dto.js';
 import { getUserPayload } from '../decorators/users/getUserPayload.js';
 import { AuthGuard } from '../guards/auth.guard.js';
@@ -11,6 +10,8 @@ import { Roles } from '../decorators/roles/roles.decorator.js';
 import { RoleSystem } from '../decorators/roles/roles.enums.js';
 import { RolesGuard } from '../guards/roles.guard.js';
 import { AuthService } from './auth.service.js';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 
 
@@ -48,6 +49,40 @@ export class UsersController {
     @UseGuards(AuthGuard)
     async updateUserControle(@getUserPayload() payload:JWTPayload,@Body() body:UpdateUserDTO){
           return await this.usersService.updateUser(payload.id as number,body)
+    }
+
+    
+
+
+    @Post("upload-image")
+    @UseGuards(AuthGuard)
+    @UseInterceptors(FileInterceptor("user-image",{
+        storage:diskStorage({
+            destination:"./images/users",
+            filename:(req,file,cd)=>{
+                const prefix=`${Date.now()}-${Math.random() *1000}`
+                const fileName= `${prefix}-${file.originalname}`
+                cd(null,fileName)
+            }
+        }),
+        fileFilter:(req,file,cd)=>{
+            if(file.mimetype.includes("image/")){
+                cd(null,true)
+            }else{
+                cd( new BadRequestException("UnSupported file format"),false)
+            }
+        },
+        limits:{fieldSize:1024 * 1024}
+    }))
+    async uploadProfileImage(@UploadedFile() file:Express.Multer.File, @getUserPayload() payload:JWTPayload){
+        if(!file) throw new NotFoundException("file not found");
+        return this.usersService.setProfileImage(payload.id as number,file.filename)
+    }
+    
+    @Delete("remove-profile-image")
+    @UseGuards(AuthGuard)
+    async deleteProfileImageControl(@getUserPayload() payload:JWTPayload){
+        return await this.usersService.deleteImage(payload.id as number)
     }
 
     @Delete(":id")

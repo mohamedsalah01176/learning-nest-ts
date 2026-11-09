@@ -1,17 +1,13 @@
 import { Injectable, BadRequestException , NotFoundException, ForbiddenException } from '@nestjs/common';
-import { IUser, JWTPayload } from './interfaces.js';
-import { CreateUserDTO } from './dto/create-user.dto.js';
 import { Repository } from 'typeorm';
 import { User } from './entities/users.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
-import bcrypt from 'bcryptjs';
-import { LoginUserDTO } from './dto/login.dto.js';
-import {JwtService} from "@nestjs/jwt"
 import { UpdateUserDTO } from './dto/update-user.dto.js';
 import { JwtPayload } from 'jsonwebtoken';
 import { RoleSystem } from '../decorators/roles/roles.enums.js';
 import { AuthService } from './auth.service.js';
-
+import { unlinkSync } from 'fs';
+import { join } from 'path';
 
 @Injectable()
 export class UsersService {
@@ -65,6 +61,38 @@ export class UsersService {
             return {message:"Users Deleted"}
         }
         throw new ForbiddenException("access denied, you are not allowed");
+
+    }
+
+    async setProfileImage(userId:number,newProfileImage:string){
+        const user = await this.getInformationOfUser(userId);
+
+        if (user.imageProfile) {
+            await this.deleteImage(userId);
+        }
+
+        user.imageProfile = newProfileImage;
+
+
+        this.userRespository.save(user);
+    }
+
+    async deleteImage(userId:number){
+        const user=await this.getInformationOfUser(userId);
+
+        if(user.imageProfile === null) throw new BadRequestException();
+
+        const imagePath = join(
+            process.cwd(),
+            'images',
+            'users',
+            user.imageProfile as string
+        );
+
+        await unlinkSync(imagePath);
+
+        user.imageProfile=null;
+        return await this.userRespository.save(user);
 
     }
 

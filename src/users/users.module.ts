@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod ,BadRequestException } from '@nestjs/common';
 import { EmployeeModule } from '../employee/employee.module.js';
 import { UsersController } from './users.controller.js';
 import { UsersService } from './users.service.js';
@@ -8,6 +8,8 @@ import { User } from './entities/users.entity.js';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service.js';
+import { MulterModule } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Module({
     imports:[
@@ -21,6 +23,24 @@ import { AuthService } from './auth.service.js';
                     signOptions:{expiresIn: config.get("JWT_EXPIRESIN")}
                 }
             }
+        }),
+        MulterModule.register({
+            storage:diskStorage({
+                destination:"./images/users",
+                filename:(req,file,cd)=>{
+                    const prefix=`${Date.now()}-${Math.random() *1000}`
+                    const fileName= `${prefix}-${file.originalname}`
+                    cd(null,fileName)
+                }
+            }),
+            fileFilter:(req,file,cd)=>{
+                if(file.mimetype.includes("image/")){
+                    cd(null,true)
+                }else{
+                    cd( new BadRequestException("UnSupported file format"),false)
+                }
+            },
+            limits:{fieldSize:1024 * 1024}
         })
     ],
     exports : [UsersService],
