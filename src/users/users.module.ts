@@ -10,9 +10,11 @@ import { ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service.js';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { MailModule } from '../mail/mail.module.js';
 
 @Module({
     imports:[
+        MailModule,
         EmployeeModule,TypeOrmModule.forFeature([User]), 
         JwtModule.registerAsync({
             inject:[ConfigService],

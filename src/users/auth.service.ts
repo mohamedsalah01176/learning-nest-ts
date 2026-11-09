@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException , NotFoundException, ForbiddenException } from '@nestjs/common';
+import { Injectable, RequestTimeoutException , BadRequestException , NotFoundException, ForbiddenException } from '@nestjs/common';
 import {  JWTPayload } from './interfaces.js';
 import { CreateUserDTO } from './dto/create-user.dto.js';
 import { Repository } from 'typeorm';
@@ -7,6 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import bcrypt from 'bcryptjs';
 import { LoginUserDTO } from './dto/login.dto.js';
 import {JwtService} from "@nestjs/jwt"
+import { MailService } from '../mail/mail.service.js';
 
 
 
@@ -15,7 +16,8 @@ export class AuthService {
 
     constructor(
         @InjectRepository(User) private readonly userRespository:Repository<User>,
-        private readonly jwtSefrvice:JwtService
+        private readonly jwtSefrvice:JwtService,
+        private readonly mailServive:MailService
     ){}
     
 
@@ -56,6 +58,12 @@ export class AuthService {
             email: user.email,
             role:user.role
         });
+        try{
+
+            await this.mailServive.sendLoginEmail(user.email)
+        }catch(error){
+            throw new RequestTimeoutException(error)
+        }
        return {accessToken}
     }
 
