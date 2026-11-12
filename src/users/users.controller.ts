@@ -91,6 +91,15 @@ export class UsersController {
      return await this.usersService.deleteUser(id,body)
     }
 
+
+    @Get("verfiy-email/:userId/:verificationToken")
+    async verificationEmail(
+        @Param("userId",ParseIntPipe) userId:number,
+        @Param("verificationToken") verificationToken:string,
+    ){
+        return await this.authService.checkVerificationToken(userId,verificationToken)
+    }
+
     // @Get()
     // findAll(){
     //     return this.UsersService.handleGetAllUsers();
