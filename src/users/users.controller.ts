@@ -12,6 +12,8 @@ import { RolesGuard } from '../guards/roles.guard.js';
 import { AuthService } from './auth.service.js';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { ForgetPasswordDTO } from './dto/forget-password-user.dto.js';
+import { ResetPasswordDTO } from './dto/restpasswor-users.dto.js';
 
 
 
@@ -99,6 +101,23 @@ export class UsersController {
     ){
         return await this.authService.checkVerificationToken(userId,verificationToken)
     }
+
+    @Post("forget-password")
+    async forgetPassword(
+        @Body() body:ForgetPasswordDTO
+    ){
+        return await this.authService.handleforgetPassword(body)
+    }
+
+    @Post("reset-password/:userId/:resetPasswordToken")
+    async resetPassword(
+        @Body() body:ResetPasswordDTO,
+        @Param("userId",ParseIntPipe) userId:number,
+        @Param("resetPasswordToken") resetPasswordToken:string,
+    ){
+        return await this.authService.handleResetPassword(userId,resetPasswordToken,body)
+    }
+
 
     // @Get()
     // findAll(){

@@ -9,6 +9,8 @@ import { LoginUserDTO } from './dto/login.dto.js';
 import {JwtService} from "@nestjs/jwt"
 import { MailService } from '../mail/mail.service.js';
 import { randomBytes } from 'crypto';
+import { ForgetPasswordDTO } from './dto/forget-password-user.dto.js';
+import { ResetPasswordDTO } from './dto/restpasswor-users.dto.js';
 
 
 
@@ -30,7 +32,7 @@ export class AuthService {
         if (foundUserInDatabase){ throw new BadRequestException("User Already exist ")};
 
        
-        const verficationToken = await this.generateVerficationToken();
+        const verficationToken = await this.generateRandomToken();
         const newUser= await this.userRespository.save({
             email,
             password:await this.generateHashPassword(password) ,
@@ -56,7 +58,7 @@ export class AuthService {
             let verificationToken=user.verificationToken;
 
             if(!user.verificationToken){
-                const newVerficationToken =await this.generateVerficationToken();
+                const newVerficationToken =await this.generateRandomToken();
                 user.verificationToken=newVerficationToken;
                 await this.userRespository.save(user);
                 verificationToken=newVerficationToken;
@@ -96,6 +98,39 @@ export class AuthService {
         return{ message:"Email Verfied Successfully, you can go to login"}
     }
 
+    async handleforgetPassword(body:ForgetPasswordDTO){
+
+        const user = await this.userRespository.findOne({where:{email:body.email}});
+        if(!user) throw new BadRequestException("Email Not Found");
+
+        const resetPasswordToken = await this.generateRandomToken();
+
+        user.resetpasswordToken =resetPasswordToken;
+
+        await this.userRespository.save(user);
+
+
+        return await this.mailServive.sendResetPasswordEmail(user.email,user.id,resetPasswordToken);
+        
+    }
+
+    async handleResetPassword(userId:number,resetpasswordToken:string,body:ResetPasswordDTO){
+        const user = await this.userRespository.findOne({where:{id:userId}});
+        if(!user) throw new BadRequestException("Email Not Found");
+
+        if(user.resetpasswordToken !== resetpasswordToken) throw new BadRequestException("Link Invalid");
+
+        const newPassword = await this.generateHashPassword(body.newpassword);
+
+        user.password = newPassword;
+        user.resetpasswordToken="";
+
+        await this.userRespository.save(user);
+
+
+        return{message:"Password Saved Successfully"};
+    }
+
     public async generateHashPassword(password:string){
 
         return await bcrypt.hash(password,Number(process.env.BCRYPT_SALT_ROUNDS))
@@ -105,7 +140,7 @@ export class AuthService {
         return await this.jwtSefrvice.sign(payload)
     }
 
-    private async generateVerficationToken(){
+    private async generateRandomToken(){
         return randomBytes(32).toString('hex');
     }
 

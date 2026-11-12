@@ -49,6 +49,9 @@ export class User{
     @Column({type:'varchar',nullable:true})
     verificationToken:string
 
+    @Column({nullable:true})
+    resetpasswordToken:string
+
     @CreateDateColumn({default:()=> "CURRENT_TIMESTAMP(6)", type:"timestamp"})
     create_at:string;
     @UpdateDateColumn({default:()=> "CURRENT_TIMESTAMP(6)", type:"timestamp",onUpdate:"CURRENT_TIMESTAMP(6)"})
