@@ -3,6 +3,8 @@ import { AppModule, ObserveInstrument } from './app.module.js';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 // import { AuthMiddlewareFunction } from './auth/auth.middleware.js';
+import helmet from 'helmet';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -35,7 +37,10 @@ async function bootstrap() {
 //   credentials: true,
 // });
 
-  
+  app.use(helmet());
+
+  app.enableCsrfProtection();
+
   await app.listen(process.env.PORT ?? 5000);
 }
 await bootstrap();

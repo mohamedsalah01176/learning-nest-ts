@@ -14,10 +14,10 @@ import { User } from './users/entities/users.entity.js';
 import { Product } from './products/entities/product.entity.js';
 import { Review } from './reviews/entities/review.entity.js';
 import { UserDetails } from './users/entities/userDetails.entity.js';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { UploadsModule } from './uploads/uploads.module.js';
 import { MailModule } from './mail/mail.module.js';
-
+import {ThrottlerGuard, ThrottlerModule} from "@nestjs/throttler"
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
 
@@ -56,13 +56,26 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       envFilePath:`.env.${process.env.NODE_ENV || 'development'}`
     }),
     UploadsModule,
-    MailModule
+    MailModule,
+    ThrottlerModule.forRoot({
+      throttlers:[
+        {
+          limit:5,
+          ttl:5000
+        }
+      ]
+    })
   ],
   controllers: [AppController],
   providers: [AppService ,{
     provide:APP_INTERCEPTOR,
     useClass:ClassSerializerInterceptor
-  }],  
+  },
+  {
+    provide:APP_GUARD,
+    useClass:ThrottlerGuard
+  }
+],  
   
 })
 export class AppModule implements NestModule {

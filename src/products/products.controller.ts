@@ -9,6 +9,7 @@ import { RolesGuard } from '../guards/roles.guard.js';
 import { getUserPayload } from '../decorators/users/getUserPayload.js';
 import type { JWTPayload } from '../users/interfaces.js';
 import { ApiOperation, ApiQuery, ApiSecurity, ApiTags  } from '@nestjs/swagger';
+import { SkipThrottle, Throttle } from '@nestjs/throttler';
 
 @ApiTags('Products')
 @Controller('api/products')
@@ -28,6 +29,8 @@ export class ProductsController {
     return this.productsService.create(createProductDto,payload.id as number);
   }
 
+  // @Throttle({default:{ttl:10000,limit:5}})
+  // @SkipThrottle()
   @Get()
   @ApiOperation({
     summary: 'Get all products',
