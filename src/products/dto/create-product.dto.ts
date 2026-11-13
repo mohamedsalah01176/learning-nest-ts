@@ -1,3 +1,4 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsString,
   IsNotEmpty,
@@ -14,22 +15,28 @@ export class CreateProductDto {
   @IsString()
   @IsNotEmpty()
   @MaxLength(150)
+  @ApiProperty({ example: 'Wireless Headphones', description: 'Product name', maxLength: 150 })
   name: string;
 
-  @IsOptional()
   @IsString()
+  @IsOptional()
+  @ApiPropertyOptional({ example: 'High quality noise cancelling headphones', description: 'Product description' })
   description?: string;
 
   @IsNumber({ maxDecimalPlaces: 2 })
   @IsPositive()
+  @ApiProperty({ example: 99.99, description: 'Product price' })
   price: number;
 
-  @IsOptional()
   @IsNumber()
   @Min(0)
+  @IsOptional()
+  @ApiPropertyOptional({ example: 50, description: 'Stock quantity' })
   stock?: number;
 
   @Column({default:true})
   @IsBoolean()
-  isActive:boolean
+  @IsOptional()
+  @ApiPropertyOptional({ example: true, default: true, description: 'Whether the product is active' })
+  isActive?: boolean
 }

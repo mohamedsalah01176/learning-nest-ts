@@ -1,12 +1,23 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule, ObserveInstrument } from './app.module.js';
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 // import { AuthMiddlewareFunction } from './auth/auth.middleware.js';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     instrument: ObserveInstrument,
   });
+
+  const swaggerConfig = new DocumentBuilder()
+  .setTitle("Learing Nest Js")
+  .setVersion("1.0.0")
+  .addSecurity("bearer",{type:"http", scheme:"bearer"})
+  .addBearerAuth()
+  .build();
+  const swaggerDocument= SwaggerModule.createDocument(app,swaggerConfig);
+  
+  SwaggerModule.setup("swagger",app,swaggerDocument)
 
   // using middleware
   // app.use(AuthMiddlewareFunction)
@@ -23,6 +34,7 @@ async function bootstrap() {
 //   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 //   credentials: true,
 // });
+
   
   await app.listen(process.env.PORT ?? 5000);
 }

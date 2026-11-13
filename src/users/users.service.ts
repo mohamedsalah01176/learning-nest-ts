@@ -8,8 +8,10 @@ import { RoleSystem } from '../decorators/roles/roles.enums.js';
 import { AuthService } from './auth.service.js';
 import { unlinkSync } from 'fs';
 import { join } from 'path';
+import { ApiSecurity } from '@nestjs/swagger';
 
 @Injectable()
+@ApiSecurity("bearer")
 export class UsersService {
 
     constructor(
@@ -74,7 +76,9 @@ export class UsersService {
         user.imageProfile = newProfileImage;
 
 
-        this.userRespository.save(user);
+        await this.userRespository.save(user);
+
+        return {message:"Profile Image Updated"}
     }
 
     async deleteImage(userId:number){

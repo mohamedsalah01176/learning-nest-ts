@@ -8,20 +8,61 @@ import { AuthGuard } from '../guards/auth.guard.js';
 import { RolesGuard } from '../guards/roles.guard.js';
 import { getUserPayload } from '../decorators/users/getUserPayload.js';
 import type { JWTPayload } from '../users/interfaces.js';
+import { ApiOperation, ApiQuery, ApiSecurity, ApiTags  } from '@nestjs/swagger';
 
+@ApiTags('Products')
 @Controller('api/products')
 @UseGuards(AuthGuard)
+@ApiSecurity("bearer")
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
   // @Roles([RoleSystem.Admin])
   // @UseGuards(RolesGuard)
+  @ApiOperation({
+    summary: 'Create a new product',
+    description: 'Creates a new product for the authenticated user.',
+  })
   async create(@Body() createProductDto: CreateProductDto, @getUserPayload() payload:JWTPayload) {
     return this.productsService.create(createProductDto,payload.id as number);
   }
 
   @Get()
+  @ApiOperation({
+    summary: 'Get all products',
+    description: 'Returns products with optional filtering by name, price, and pagination.',
+  })
+  @ApiQuery({
+    name: "name",
+    required: false,
+    type: String,
+    example: "laptop",
+  })
+  @ApiQuery({
+    name: "minPrice",
+    required: false,
+    type: Number,
+    example: 100,
+  })
+  @ApiQuery({
+    name: "maxPrice",
+    required: false,
+    type: Number,
+    example: 1000,
+  })
+  @ApiQuery({
+    name: "pageNumber",
+    required: false,
+    type: Number,
+    example: 1,
+  })
+  @ApiQuery({
+    name: "perPage",
+    required: false,
+    type: Number,
+    example: 20,
+  })
   findAll(
     @Query("name") name?:string,
     @Query("minPrice",new DefaultValuePipe(0),ParseIntPipe) minPrice?:number,
@@ -33,17 +74,29 @@ export class ProductsController {
   }
 
   @Get(':id')
+  @ApiOperation({
+    summary: 'Get product by ID',
+    description: 'Returns a single product using its ID.',
+  })
   findOne(@Param('id') id: string) {
     return this.productsService.findOne(+id);
   }
 
   @Patch(':id')
+  @ApiOperation({
+    summary: 'Update product',
+    description: 'Updates an existing product using its ID.',
+  })
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto,@getUserPayload() payload: JWTPayload) {
 
     return this.productsService.update(+id, updateProductDto,payload);
   }
 
   @Delete(':id')
+  @ApiOperation({
+    summary: 'Delete product',
+    description: 'Deletes an existing product using its ID.',
+  })
   remove(@Param('id') id: string ,@getUserPayload() payload: JWTPayload) {
     return this.productsService.remove(+id, payload);
   }
