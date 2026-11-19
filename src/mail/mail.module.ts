@@ -12,7 +12,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
             return {
                 transport: {
                     host: config.get<string>("SMTP_HOST"),
-                    post: config.get<number>("SMTP_PORT"),
+                    port: config.get<number>("SMTP_PORT"),
                     secure: process.env.NODE_ENV === "production",
                     auth: {
                         user: config.get<string>("SMTP_USERNAME"),
