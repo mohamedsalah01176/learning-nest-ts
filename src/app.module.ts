@@ -17,7 +17,8 @@ import { UserDetails } from './users/entities/userDetails.entity.js';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { UploadsModule } from './uploads/uploads.module.js';
 import { MailModule } from './mail/mail.module.js';
-import {ThrottlerGuard, ThrottlerModule} from "@nestjs/throttler"
+import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler"
+import { dataSourceOptions } from './db/data-source.js';
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
 
@@ -30,53 +31,59 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     ProductsModule,
     ReviewsModule,
     PersonsModule,
-    TypeOrmModule.forRootAsync({
-      inject:[ConfigService],
-      useFactory:(config:ConfigService)=>{
-        console.log({
-        host: config.get('DB_HOST'),
-        database: config.get('DB_DATABASE'),
-        passwordExists: Boolean(config.get('DB_PASSWORD')),
-      });
-        
-        return{
-          type:"postgres",
-          database:config.get<string>("DB_DATABASE") || config.get<string>("DB_DATBASE"),
-          username:config.get<string>("DB_USERNAME"),
-          password:String(config.get<string>("DB_PASSWORD") ?? ""),
-          port:Number(config.get<string>("DB_PORT") || 5432),
-          host:config.get<string>("DB_HOST") || "localhost",
-          synchronize:process.env.NODE_ENV !== "production", // develop mode only
-          entities:[User,Product,Review,UserDetails]
-        }
-      }
+    // remote database
+    TypeOrmModule.forRoot({
+      ...dataSourceOptions,
+      migrationsRun: false,
     }),
+    // local data base
+    // TypeOrmModule.forRootAsync({
+    //   inject:[ConfigService],
+    //   useFactory:(config:ConfigService)=>{
+    //     console.log({
+    //     host: config.get('DB_HOST'),
+    //     database: config.get('DB_DATABASE'),
+    //     passwordExists: Boolean(config.get('DB_PASSWORD')),
+    //   });
+
+    //     return{
+    //       type:"postgres",
+    //       database:config.get<string>("DB_DATABASE") || config.get<string>("DB_DATBASE"),
+    //       username:config.get<string>("DB_USERNAME"),
+    //       password:String(config.get<string>("DB_PASSWORD") ?? ""),
+    //       port:Number(config.get<string>("DB_PORT") || 5432),
+    //       host:config.get<string>("DB_HOST") || "localhost",
+    //       synchronize:process.env.NODE_ENV !== "production", // develop mode only
+    //       entities:[User,Product,Review,UserDetails]
+    //     }
+    //   }
+    // }),
     ConfigModule.forRoot({
-      isGlobal:true,
-      envFilePath:`.env.${process.env.NODE_ENV || 'development'}`
+      isGlobal: true,
+      envFilePath: `.env.${process.env.NODE_ENV || 'development'}`
     }),
     UploadsModule,
     MailModule,
     ThrottlerModule.forRoot({
-      throttlers:[
+      throttlers: [
         {
-          limit:5,
-          ttl:5000
+          limit: 5,
+          ttl: 5000
         }
       ]
     })
   ],
   controllers: [AppController],
-  providers: [AppService ,{
-    provide:APP_INTERCEPTOR,
-    useClass:ClassSerializerInterceptor
+  providers: [AppService, {
+    provide: APP_INTERCEPTOR,
+    useClass: ClassSerializerInterceptor
   },
-  {
-    provide:APP_GUARD,
-    useClass:ThrottlerGuard
-  }
-],  
-  
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard
+    }
+  ],
+
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
