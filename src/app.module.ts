@@ -60,7 +60,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     // }),
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `.env.${process.env.NODE_ENV || 'development'}`
+      envFilePath: process.env.NODE_ENV !== "production"?`.env.${process.env.NODE_ENV || 'development'}`:".env"
     }),
     UploadsModule,
     MailModule,
